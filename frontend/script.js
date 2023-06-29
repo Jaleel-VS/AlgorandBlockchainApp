@@ -16,11 +16,12 @@ function saveData(event) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(datadic)
-    })
+    }).then(response=> response.json())
         .then(response => {
-            if (response.ok) {
+            if (response.success) {
                 // Request was successful
                 console.log('Data sent to the backend successfully');
+                console.log(response.message);
             } else {
                 // Request failed
                 console.error('Error sending data to the backend');
