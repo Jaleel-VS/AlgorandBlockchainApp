@@ -9,22 +9,21 @@ load_dotenv()
 SECRET_KEY=os.getenv("ALGO_SECRET")
 ADDR = account.address_from_private_key(SECRET_KEY)
 
-print("My address: {}".format(ADDR))
-
 class Transaction:
     def __init__(self, note):
-        self.setup()
+        self.__setup()
         self.sp = self.client.suggested_params()
         self.note = get_encoded_bytes(note)
+        self.tx_id = self.__create_transaction()
+        self.__print_transaction_address(self.tx_id)
 
-
-    def setup(self):
+    def __setup(self):
         self.client = AlgodClient(
             os.getenv("ALGOD_TOKEN"),
             os.getenv("ALGOD_SERVER"),
         )
 
-    def create_transaction(self):
+    def __create_transaction(self):
         txn = transaction.PaymentTxn(
             sender=ADDR,
             sp=self.sp,
@@ -48,13 +47,11 @@ class Transaction:
             raise e
 
         return txid
+    
+    def __print_transaction_address(self, txid):
+        print_transaction_address(txid)
 
     
 
-note = {
-    "message": "Hello World"
-}
-
-tx = Transaction(note)
-tx_id = tx.create_transaction()
-print_transaction_address(tx_id)
+if __name__ == "__main__":
+    txn = Transaction("Hello World!")

@@ -10,6 +10,6 @@ def get_encoded_bytes(json_object, encoding='utf-8'):
     
 def print_transaction_address(txid):
     print("Transaction ID: {}".format(txid))
-    print("View transaction at: ", end="")
+    print("View transaction at: ")
     print("https://app.dappflow.org/explorer/transaction/{}".format(txid))
     print("https://testnet.algoexplorer.io/tx/{}".format(txid))
