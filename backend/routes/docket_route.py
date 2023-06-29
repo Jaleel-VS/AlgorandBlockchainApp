@@ -43,8 +43,8 @@ async def upload_new_docket(victim_details: UploadFile| None= None, victim_state
 async def create_docket(docket: Docket):
     print(docket)
     docket_bytes = json.dumps(docket.dict()).encode()
-    await s3_upload(contents=docket_bytes, key="Docket_from_frontend.txt")
-    return 
+    # await s3_upload(contents=docket_bytes, key="Docket_from_frontend.txt")
+    return {"message": "Dumela Lefatse", "success": True}
 
 
 
