@@ -15,7 +15,7 @@ function saveData(event) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(datadic)
     })
         .then(response => {
             if (response.ok) {
@@ -31,15 +31,15 @@ function saveData(event) {
         });
 
 
-    const data = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`;
-    const blob = new Blob([data], { type: 'text/plain' });
+    // const data = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`;
+    // const blob = new Blob([data], { type: 'text/plain' });
 
-    const filename = 'data.txt';
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    link.click();
+    // const filename = 'data.txt';
+    // const link = document.createElement('a');
+    // link.href = URL.createObjectURL(blob);
+    // link.download = filename;
+    // link.click();
 
     // Display the data on the screen
-    document.getElementById('displayData').textContent = data;
+    // document.getElementById('displayData').textContent = data;
 }
