@@ -2,6 +2,10 @@
 import boto3
 #import zipfile # Wanna make our dockets into a zip file
 from fastapi import APIRouter, UploadFile, HTTPException, status
+from models.docket import Docket
+import json
+
+
 docket_router = APIRouter()
 s3_client = boto3.resource('s3') # What this does is it indicates which service(s) you are going to use. This one basically says "Let's use amazon s3"
 
@@ -33,6 +37,12 @@ async def upload_new_docket(victim_details: UploadFile| None= None, victim_state
     contents = victim_details_contents + victim_statement_contents
     await s3_upload(contents=contents, key = "demo_file1")
     return
+
+# Post test docket 
+@docket_router.post("/docket_test")
+async def create_docket(docket: Docket):
+    print(docket)
+    return 
 
 
 
