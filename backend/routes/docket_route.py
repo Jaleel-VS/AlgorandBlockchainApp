@@ -12,7 +12,7 @@ s3_client = boto3.resource('s3') # What this does is it indicates which service(
 # Helping methods
 async def s3_upload(contents: bytes, key: str):
 
-    s3_client.Bucket('fairchancedocketbucket').put_object(Key="Victim1_docket", Body=contents)
+    s3_client.Bucket('fairchancedocketbucket').put_object(Key=key, Body=contents)
 
 # s3.client is a low-level client representing Amazon Simple Storage Service (s3). Documentation shows the many methods that you can use with this client
 # GET REQUEST METHOD (Getting the list of all buckets)
@@ -42,6 +42,8 @@ async def upload_new_docket(victim_details: UploadFile| None= None, victim_state
 @docket_router.post("/docket_test")
 async def create_docket(docket: Docket):
     print(docket)
+    docket_bytes = json.dumps(docket.dict()).encode()
+    await s3_upload(contents=docket_bytes, key="Docket_from_frontend.txt")
     return 
 
 
