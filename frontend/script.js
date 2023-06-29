@@ -8,9 +8,9 @@ function saveData(event) {
 
     // Create a dictionary object
 
-    const backendURL = "";
+    const backendURL = "http://127.0.0.1:8000/";
     // Send the dictionary object to the backend
-    fetch(`${backendURL}`, {
+    fetch(`${backendURL}docket_test`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
