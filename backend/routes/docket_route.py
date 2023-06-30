@@ -3,6 +3,7 @@ import boto3
 #import zipfile # Wanna make our dockets into a zip file
 from fastapi import APIRouter, UploadFile, HTTPException, status
 from models.docket import Docket
+from services.transaction import Transaction
 import json
 
 

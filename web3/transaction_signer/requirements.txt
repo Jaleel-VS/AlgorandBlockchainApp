@@ -1,2 +1,0 @@
-python-dotenv
-py-algorand-sdk

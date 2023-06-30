@@ -1,0 +1,5 @@
+python-dotenv
+py-algorand-sdk
+pymongo
+uvicorn
+bso3
