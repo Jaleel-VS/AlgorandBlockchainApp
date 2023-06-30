@@ -22,7 +22,8 @@ function saveData(event) {
                 // Request was successful
                 console.log('Data sent to the backend successfully');
                 //console.log(response.message);
-                document.getElementById('displayData').textContent = response.transaction_hash
+                document.getElementById('displayAddress').textContent = response.transaction_address
+                document.getElementById('displayHash').textContent = response.transaction_hash
             } else {
                 // Request failed
                 console.error('Error sending data to the backend');
