@@ -4,6 +4,7 @@ import boto3
 from fastapi import APIRouter, UploadFile, HTTPException, status
 from models.docket import Docket
 from services.transaction import Transaction
+from services.utils import get_hash
 import json
 
 
@@ -42,10 +43,25 @@ async def upload_new_docket(victim_details: UploadFile| None= None, victim_state
 # Post test docket 
 @docket_router.post("/docket_test")
 async def create_docket(docket: Docket):
-    print(docket)
-    docket_bytes = json.dumps(docket.dict()).encode()
-    # await s3_upload(contents=docket_bytes, key="Docket_from_frontend.txt")
-    return {"message": "Dumela Lefatse", "success": True}
+    try:
+        print(docket)
+        docket_bytes = json.dumps(docket.dict()).encode()
+
+        # we should abstract this to a seperate method/class
+        t_hash = get_hash(docket_bytes)
+        t = Transaction(t_hash)
+        t_add = t.get_transaction_address(t.tx_id)
+        # await s3_upload(contents=docket_bytes, key="Docket_from_frontend.txt")
+        return {"success": True,
+                "transaction_hash": t_hash,
+                "transaction_address": t_add}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=e
+        )
+    
+    
 
 
 

@@ -1,6 +1,6 @@
 from algosdk.v2client.algod import AlgodClient
 from algosdk import transaction, account, mnemonic
-from utils import get_encoded_bytes, print_transaction_address
+from .utils import get_encoded_bytes, get_transaction_address
 from dotenv import load_dotenv
 import os
 
@@ -15,7 +15,6 @@ class Transaction:
         self.sp = self.client.suggested_params()
         self.note = get_encoded_bytes(note)
         self.tx_id = self.__create_transaction()
-        self.__print_transaction_address(self.tx_id)
 
     def __setup(self):
         self.client = AlgodClient(
@@ -48,8 +47,8 @@ class Transaction:
 
         return txid
     
-    def __print_transaction_address(self, txid):
-        print_transaction_address(txid)
+    def get_transaction_address(self, txid):
+        return get_transaction_address(txid)
 
     
 
