@@ -46,6 +46,44 @@ body{
     box-shadow: #091D30;
 }
 
+.displayResponse{
+
+    margin: auto;
+    margin-top: 12vh;
+    background-color:white ;
+    width: 60vh;
+    height: 70vh; 
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: #091D30;
+
+}
+
+.displayIDText{
+    margin: auto;
+    color: #091D30;
+}
+
+.displayID{
+    margin: auto;
+    color: #091D30;
+}
+
+.displayHashText{
+    margin: auto;
+    color: #091D30;
+}
+
+.displayHash{
+    margin: auto;
+    color: #091D30;
+}
+
+.displayAddressText{
+    margin: auto;
+    color: #091D30;
+}
+
 #heading{
     padding-top: 15px;
     margin-bottom: 35px;
@@ -55,6 +93,9 @@ body{
 .inner{
     width: auto;
     background-color: #091D30;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    
 }
 
 #name{
