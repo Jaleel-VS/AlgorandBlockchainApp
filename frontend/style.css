@@ -49,7 +49,7 @@ body{
 .displayResponse{
 
     margin: auto;
-    margin-top: 12vh;
+    margin-top: 10vh;
     background-color:white ;
     width: 60vh;
     height: 70vh; 
@@ -90,12 +90,26 @@ body{
     color: white;
 }
 
+#heading2{
+    padding-top: 15px;
+    margin-bottom: 35px;
+    color: white; 
+}
+
 .inner{
     width: auto;
     background-color: #091D30;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     
+}
+
+.inner2{
+    width: auto;
+    background-color: #091D30;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 50px;
 }
 
 #name{
@@ -128,4 +142,8 @@ body{
     border: 2px solid #091D30;
     width: 250px;
     height: 15px;
+}
+
+h2{
+    color: #091D30;
 }
