@@ -31,3 +31,60 @@
         transform: rotate(360deg);
     }
 }
+
+body{
+    background-color: #4A5158;
+}
+.form{
+    margin: auto;
+    margin-top: 12vh;
+    background-color: white ;
+    width: 60vh;
+    height: 70vh;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: #091D30;
+}
+
+#heading{
+    padding-top: 15px;
+    margin-bottom: 35px;
+    color: white;
+}
+
+.inner{
+    width: auto;
+    background-color: #091D30;
+}
+
+#name{
+    border-radius: 25px;
+    padding: 10px;
+    border: 2px solid #091D30;
+    width: 250px;
+    height: 15px;
+}
+
+#submit{
+    margin-top: 20px ;
+    background-color: #091D30;
+    border-radius: 10px;
+    color: white;
+    height: 30px;
+}
+
+#email{
+    border-radius: 25px;
+    padding: 10px;
+    border: 2px solid #091D30;
+    width: 250px;
+    height: 15px;
+}
+
+#phone{
+    border-radius: 25px;
+    padding: 10px;
+    border: 2px solid #091D30;
+    width: 250px;
+    height: 15px;
+}
