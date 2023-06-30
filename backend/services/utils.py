@@ -10,12 +10,7 @@ def get_encoded_bytes(json_object, encoding='utf-8'):
         return None
     
 def get_transaction_address(txid):
-    output = ""
-    output += "Transaction ID: {}\n".format(txid)
-    output += "View transaction at:\n"
-    output += "https://app.dappflow.org/explorer/transaction/{}\n".format(txid)
-    output += "https://testnet.algoexplorer.io/tx/{}".format(txid)
-    return output
+    return "https://testnet.algoexplorer.io/tx/{}".format(txid)
 
 def get_hash(bytes):
     return hashlib.sha256(bytes).hexdigest()

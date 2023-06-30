@@ -54,6 +54,7 @@ async def create_docket(docket: Docket):
         # await s3_upload(contents=docket_bytes, key="Docket_from_frontend.txt")
         return {"success": True,
                 "transaction_hash": t_hash,
+                "transaction_id": t.tx_id, # This is the transaction id that we will be using to get the transaction details    
                 "transaction_address": t_add}
     except Exception as e:
         raise HTTPException(

@@ -1,31 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <title>Data Capture and Display</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <h2>Data Capture Form</h2>
   <form onsubmit="saveData(event)">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required><br><br>
-    
+
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required><br><br>
-    
+
     <label for="phone">Phone:</label>
     <input type="tel" id="phone" name="phone" required><br><br>
-    
+
     <input type="submit" value="Save and Display">
   </form>
 
-  
-  <div id="displayAddress"></div>
+  <div id="displayIDText"></div>
+  <div id="displayID"></div>
   <br>
+  <div id="displayHashText"></div>
   <div id="displayHash"></div>
+  <br>
+  <div id="displayAddressText"></div>
+  <a id="displayAddress" target="_blank"></a>
 
-  
+  <div class="loader" id="loader" style="display: none;"></div>
+
   <script src="script.js"></script>
 
-
 </body>
+
 </html>

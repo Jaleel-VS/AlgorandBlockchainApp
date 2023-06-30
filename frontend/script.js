@@ -1,6 +1,9 @@
 function saveData(event) {
     event.preventDefault();
 
+    // Show the loader
+    document.getElementById('loader').style.display = 'block';
+
     const tname = document.getElementById('name').value;
     const temail = document.getElementById('email').value;
     const tphone = document.getElementById('phone').value;
@@ -18,31 +21,32 @@ function saveData(event) {
         body: JSON.stringify(datadic)
     }).then(response=> response.json())
         .then(response => {
+
+            // Hide the loader
+            document.getElementById('loader').style.display = 'none';
+
             if (response.success) {
                 // Request was successful
                 console.log('Data sent to the backend successfully');
                 //console.log(response.message);
-                document.getElementById('displayAddress').textContent = response.transaction_address
+                document.getElementById('displayIDText').textContent = "Docket successfully created. The transaction ID is: "
+                document.getElementById('displayID').textContent = response.transaction_id
+
+                document.getElementById('displayHashText').textContent = "The transaction hash is: "
                 document.getElementById('displayHash').textContent = response.transaction_hash
+
+                document.getElementById('displayAddressText').textContent = "The hash can be viewed on the blockchain at: "
+                document.getElementById('displayAddress').textContent = response.transaction_address
+                document.getElementById('displayAddress').href = response.transaction_address
             } else {
                 // Request failed
                 console.error('Error sending data to the backend');
             }
         })
         .catch(error => {
+            // Hide the loader
+            document.getElementById('loader').style.display = 'none';
+
             console.error('Error sending data to the backend:', error);
         });
-
-
-    // const data = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`;
-    // const blob = new Blob([data], { type: 'text/plain' });
-
-    // const filename = 'data.txt';
-    // const link = document.createElement('a');
-    // link.href = URL.createObjectURL(blob);
-    // link.download = filename;
-    // link.click();
-
-    // Display the data on the screen
-    // document.getElementById('displayData').textContent = data;
 }
