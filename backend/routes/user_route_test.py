@@ -29,7 +29,7 @@ async def delete_todo(id:str):
 
 
 # for the login 
-@user_router.post("/login")
+@user_router.post("/login_test")
 async def user_login(user: User): 
     #if user_collection.find_one({"badgeID": badge_id}, {"password": pass_word}) is None:
     #    print("BadgeID or password is incorrect!")
