@@ -8,7 +8,8 @@
 def individual_serial(user) -> dict:
     return{
         # We return the key-value pair for everything
-        "badgeID": str(user["_id"]), # mongodb create this is for us. We wrap it into a string and wwe pull out the id
+        "id": str(user["_id"]), # mongodb create this is for us. We wrap it into a string and wwe pull out the id
+        "badgeID": user["badgeID"],
         "idNumber": user["idNumber"],
         "gender": user["gender"],
         "names": user["names"],
