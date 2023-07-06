@@ -8,19 +8,8 @@ from pydantic import BaseModel # Pydantic is a Python library data parsing and v
 
 
 class User(BaseModel):
-    badgeID: str
-    idNumber: str 
-    gender: str
-    names: str
-    surnames: str
-    password: str # Will this need to be encrypted?
-    unitNumber: str # Help: do I make it unitNumber or station? I'm confused between database theory and OOP
-    rank: str
-    phoneNumber: str
-    homeNumber: str
-    email: str
-    nationalities: str # Should I keep this?
-    residentialAddress: str
+    username: str
+    password: str
     
 
 

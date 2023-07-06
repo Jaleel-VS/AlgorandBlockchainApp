@@ -29,10 +29,18 @@ async def delete_todo(id:str):
 
 
 # for the login 
-@user_router.get("/login")
-async def user_login(badge_id:str, pass_word: str): #
-    if user_collection.find_one({"badgeID": badge_id}, {"password": pass_word}) is None:
-        print("BadgeID or password is incorrect!")
-    else:
-        print("You have successfully logged in!")
-        
+@user_router.post("/login")
+async def user_login(user: User): 
+    #if user_collection.find_one({"badgeID": badge_id}, {"password": pass_word}) is None:
+    #    print("BadgeID or password is incorrect!")
+    #else:
+    #   print("You have successfully logged in!")
+    try:
+        print("It worked!")
+        return {"success": True}
+    except:
+        print("oops")
+
+    
+
+            
