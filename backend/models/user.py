@@ -8,8 +8,9 @@ from pydantic import BaseModel # Pydantic is a Python library data parsing and v
 
 
 class User(BaseModel):
-    username: str
+    BadgeID: str
     password: str
+    role:str
     
 
 
