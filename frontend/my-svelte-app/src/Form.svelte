@@ -5,7 +5,6 @@
     <input type="submit" id="submit" value="Sign In">
 </form>
 
-
 <style>
 
     #submit{
@@ -17,10 +16,6 @@
         width: 25vh;
         height: 6vh;
         border-radius: 10px;
-    }
-
-    button:hover{
-        background-color: #fffb0362;
     }
 
     #name{
@@ -57,3 +52,7 @@
         
 	}
 </style>
+
+<script>
+    
+</script>
