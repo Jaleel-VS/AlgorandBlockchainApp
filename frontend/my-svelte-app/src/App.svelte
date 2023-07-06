@@ -1,8 +1,7 @@
 <script>
-	export let name;
+	//export let name;
 	import Image from "./Image.svelte"
 	import Form from "./Form.svelte"
-	import SignIn from "./Sign-In.svelte";
 </script>
 
 <main>
