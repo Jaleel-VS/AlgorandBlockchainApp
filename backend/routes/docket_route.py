@@ -21,24 +21,9 @@ async def s3_upload(contents: bytes, key: str):
 
 
 
-# GET REQUEST METHOD (Listing the dockets)
 
-# Get REQUEST METHOD (Get a specific docket)
 
-# POST REQUEST METHOD(uploading a new docket)
-@docket_router.post("/docket") # Defining the route. 
-async def upload_new_docket(victim_details: UploadFile| None= None, victim_statement:UploadFile| None =None): # Now for the Python method that is executed 
-    print("file uploaded") # Receiving the file as is did not cause any issues 
-    if not victim_details:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail='No file found!!'
-        )
-    victim_details_contents = await victim_details.read()
-    victim_statement_contents = await victim_statement.read()
-    contents = victim_details_contents + victim_statement_contents
-    await s3_upload(contents=contents, key = "demo_file1")
-    return
+
 
 # Post test docket 
 @docket_router.post("/docket_test")
@@ -51,7 +36,7 @@ async def create_docket(docket: Docket):
         t_hash = get_hash(docket_bytes)
         t = Transaction(t_hash)
         t_add = t.get_transaction_address(t.tx_id)
-        # await s3_upload(contents=docket_bytes, key="Docket_from_frontend.txt")
+        await s3_upload(contents=docket_bytes, key=f"Docket_{t.tx_id}.txt")
         return {"success": True,
                 "transaction_hash": t_hash,
                 "transaction_id": t.tx_id, # This is the transaction id that we will be using to get the transaction details    
@@ -70,7 +55,9 @@ async def create_docket(docket: Docket):
     # The access key id and the password are very importaht when we are trying to configure the IAM user on our machine
 
   
+# GET REQUEST METHOD (Listing the dockets)
 
+# Get REQUEST METHOD (Get a specific docket)
 
 # PUT REQUEST METHOD (Update, though it won't be a true update because s3 will just use versioning)
 

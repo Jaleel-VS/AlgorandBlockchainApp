@@ -8,19 +8,11 @@
 def individual_serial(user) -> dict:
     return{
         # We return the key-value pair for everything
-        "badgeID": str(user["_id"]), # mongodb create this is for us. We wrap it into a string and wwe pull out the id
-        "idNumber": user["idNumber"],
-        "gender": user["gender"],
-        "names": user["names"],
-        "surnames": user["surnames"], 
+        #"id": str(user["_id"]), # mongodb create this is for us. We wrap it into a string and wwe pull out the id
+        "badgeID": user["badgeID"], 
         "password": user["password"],
-        "unitNumber": user["unitNumber"],
-        "rank": user["rank"],
-        "phoneNumber": user["phoneNumber"],
-        "homeNumber": user["homeNumber"],
-        "email": user["email"],
-        "nationalities": user["nationalities"],
-        "residentialAddress": user["residentialAddress"], 
+        "role": user["role"]
+        
     }
 
 # We then want to retrieve all of them. The code above just serializes one of the todos

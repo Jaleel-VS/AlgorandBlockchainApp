@@ -7,10 +7,9 @@ from pydantic import BaseModel # Pydantic is a Python library data parsing and v
 # Pydantic defines BaseModel class.  It acts as the base class for creating user defined models
 
 
-class User(BaseModel):
-    BadgeID: str
+class UserLogin(BaseModel):
+    username: str
     password: str
-    role:str
     
 
 
