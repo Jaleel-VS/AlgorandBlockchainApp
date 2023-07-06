@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from routes.user_route import user_router
 
 from routes.docket_route import docket_router
+from routes.test_route import test_router
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -29,4 +30,5 @@ app.add_middleware(
 
 app.include_router(user_router)
 app.include_router(docket_router)
+app.include_router(test_router)
 

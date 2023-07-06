@@ -1,7 +1,5 @@
 python-dotenv
-
 py-algorand-sdk
-
 pymongo
 uvicorn
 boto3
