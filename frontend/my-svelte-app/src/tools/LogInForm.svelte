@@ -22,13 +22,21 @@
                 body: JSON.stringify(datadic),
             });
             const data = await response.json();
-            console.log(data); 
+            console.log(data);
 
-            if (data.officerType === "regular") {
-                console.log("regular officer successfully connected")
-            } else if (data.officerType === "senior") {
-                console.log("senior officer successfully connected")
+            if (data.success) {
+                if (data.officerType === "Basic") {
+                    console.log("Basic officer successfully connected");
+                } else if (data.officerType === "Senior") {
+                    console.log("Senior officer successfully connected");
+                } else if (data.officerType === "Investigator") {
+                    console.log("Investigator successfully connected");
+                }
             }
+            else{
+                console.log(data.message)
+            }
+        
 
             console.log("Data sent to the backend successfully");
         } catch (error) {
