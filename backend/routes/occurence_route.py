@@ -12,7 +12,6 @@ s3_client = boto3.resource('s3')
 
 # Helping methods
 async def s3_upload(contents: bytes, key: str):
-
     s3_client.Bucket('fairchancedocketbucket').put_object(Key=key, Body=contents)
 
 # Post an occurance
