@@ -72,10 +72,6 @@
         border-radius: 10px;
     }
 
-    button:hover{
-        background-color: #fffb0362;
-    }
-
     #name{
         margin-top: 5vh;
         padding-left: 2vh;
@@ -109,7 +105,3 @@
         font-weight: 700;
     }
 </style>
-
-<script>
-    
-</script>
