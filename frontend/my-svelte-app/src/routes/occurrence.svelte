@@ -22,21 +22,9 @@
         </div>
     </div>
 
-    <button>Submit Occurrence</button>
-
 </main>
 
 <style>
-    button{
-        background-color: #091d30;
-        color: white;
-        margin-top: 5vh;
-        text-align: center;
-        margin:auto;
-        width: 25vh;
-        height: 6vh;
-        border-radius: 10px;
-    }
     /* .victim{
         background-color: white;
         width: 75vh;
@@ -44,7 +32,7 @@
 
     .victim{
         background-color: white;
-        height: 138vh;
+        height: 144vh;
         width: 80vh;
         margin:auto;
         margin-top: 5vh;
@@ -53,7 +41,7 @@
 
     .occurrence{
         background-color: #E8E8E8 ;
-		height: 168vh;
+		height: 175vh;
 		align-content: center;
     }
 

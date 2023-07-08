@@ -108,11 +108,23 @@
             type="textarea"
             id="desc"
             name="desc"
-            required/>
+            required/><br /><br />
+
+    <button>Submit Occurrence</button>
 
 </form>
 
 <style>
+    button{
+        background-color: #091d30;
+        color: white;
+        text-align: center;
+        margin-left: 26vh;
+        width: 25vh;
+        height: 6vh;
+        border-radius: 10px;
+    }
+
     #v{
         color: #091D30;
         font-size: 30px;
