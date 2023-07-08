@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-
+from routes.evidence_route import evidence_router
 from routes.docket_route import docket_router
 from routes.test_route import test_router
 from fastapi.middleware.cors import CORSMiddleware
@@ -31,4 +31,4 @@ app.add_middleware(
 
 app.include_router(docket_router)
 app.include_router(test_router)
-
+app.include_router(evidence_router)
