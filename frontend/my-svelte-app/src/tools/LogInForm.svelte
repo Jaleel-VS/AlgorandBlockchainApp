@@ -1,4 +1,10 @@
 <script>
+    // import router
+    import {push} from 'svelte-spa-router'
+
+    //get officer from store
+    import {officer} from 'store.js'
+
     // Define initial form data
     let username = "";
     let password = "";
@@ -13,6 +19,7 @@
 
         const backendURL = "http://127.0.0.1:8000/";
 
+        // push("/welcome");
         try {
             const response = await fetch(`${backendURL}login_test`, {
                 method: "POST",
@@ -25,8 +32,12 @@
             console.log(data);
 
             if (data.success) {
+                /* set data in store */
+                officer = data
+
                 if (data.officerType === "Basic") {
                     console.log("Basic officer successfully connected");
+                    navigate("/occurrence");
                 } else if (data.officerType === "Senior") {
                     console.log("Senior officer successfully connected");
                 } else if (data.officerType === "Investigator") {
