@@ -2,6 +2,8 @@
 from pydantic import BaseModel
 
 class Docket(BaseModel):
+    occID: str
+    DocketID:str 
     name: str
     email: str
     phone: str

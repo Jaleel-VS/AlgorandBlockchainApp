@@ -4,7 +4,13 @@ import boto3
 import json
 # Send relevant document to the Blockchain
 
-s3_resource = boto3.resource('s3') # What this does is it indicates which service(s) you are going to use. This one basically says "Let's use amazon s3"
+#s3_resource = boto3.resource('s3') # What this does is it indicates which service(s) you are going to use. This one basically says "Let's use amazon s3"
+session = boto3.Session(
+    aws_access_key_id= "AKIAXKPWQZKJRJOH7NPN",
+    aws_secret_access_key= "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",
+    region_name= "eu-north-1"
+)
+s3_resource = session.resource('s3')
 
 def send_hash_to_blockchain(document_bytes: bytes) -> dict:
         t_hash = get_hash(document_bytes)

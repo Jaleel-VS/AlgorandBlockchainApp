@@ -2,20 +2,22 @@
 import boto3
 from fastapi import APIRouter, UploadFile, HTTPException, status
 from models.docket import Docket
+from config.database import get_docket_count, update_docket_count
 from services.transaction import Transaction
 from services.utils import get_hash
-from utils.helper import send_hash_to_blockchain
-from utils.helper import s3_upload
+from utils.helper import send_hash_to_blockchain, s3_upload, s3_resource
+from datetime import datetime
 import json
 import os
 
 
 docket_router = APIRouter()
-s3_resource = boto3.resource('s3') 
+
 
 @docket_router.get("/docket_download") # This downloads the docket
 async def download_docket(caseID: str): 
     file = f'.\downloads\Docket_{caseID}.txt'
+    
     s3_resource.Bucket('fairchancedocketbucket').download_file(f'DOCKETS/Docket_{caseID}.txt', file)
     f = open(file, "r")
     print(f.read())
@@ -83,7 +85,10 @@ async def create_docket(docket: Docket):
         # Sending to Blockchain
         response_dict = dict(send_hash_to_blockchain(docket_bytes))
         # Uploading to s3 bucket
-        await s3_upload(contents=docket_bytes, key=f"Docket_{response_dict['transaction_id']}.txt", folder= "DOCKETS")
+        now = datetime.now()
+        docket_number = get_docket_count()
+        await s3_upload(contents=docket_bytes, key=f"Docket_{docket_number}_{now}.txt", folder= "DOCKETS")
+        update_docket_count()
         return response_dict
     except Exception as e:
         raise HTTPException(

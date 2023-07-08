@@ -21,15 +21,22 @@ async def user_login(user: UserLogin):
         #         "officerType": "senior",
         #         }
         user_dict = dict(user)
-        user_object = user_collection.find_one({"badgeID": user_dict["username"]}) # It returns the entire object
+        user_object = user_collection.find_one({"badgeID": user_dict["username"]}, {"_id": 0}) # It returns the entire object
+        print(type(user_object))
         if user_object is not None:
             if user_dict["password"] == user_object["password"]:
                 role = user_object["role"]
                 #print(role)
-                return{
+                # result_dict = {
+                #     "success": True,
+                #     "officerType": role,
+                # } | user_object # Returns the entire user information thingy
+                user_object.update({
                     "success": True,
                     "officerType": role,
-                }
+                })
+                print(user_object)
+                return user_object
             else:
                 return {
                     "success": False,

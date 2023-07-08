@@ -2,14 +2,14 @@
 import boto3
 from fastapi import APIRouter, UploadFile, HTTPException, status
 from models.evidence import Evidence
+from config.database import get_evidence_count, update_evidence_count
 from services.transaction import Transaction
-from utils.helper import send_hash_to_blockchain
-#from utils.helper import s3_upload
+from utils.helper import send_hash_to_blockchain, s3_resource
 from services.utils import get_hash
 import json
 
 evidence_router = APIRouter()
-s3_resource = boto3.resource('s3') # What this does is it indicates which service(s) you are going to use. This one basically says "Let's use amazon s3"
+
 
 async def s3_upload(contents: bytes, key: str, folder:str, meta_data: dict):
     #s3_resource.Bucket('fairchancedocketbucket').put_object(Key=f'{folder}/{key}', Body=contents, Metadata={'Case Number': meta_data.get("case_Id"), 'Evidence Description': meta_data["evidence_description"] , "Evidence Origin": meta_data["evidence_origin"], "Associated Officer": meta_data["associated_officer"] })
@@ -30,7 +30,9 @@ async def upload_evidence(evidence: Evidence):
         # Sending to Blockchain
         response_dict = dict(send_hash_to_blockchain(evidence_data_bytes))
         # # Uploading to s3 bucket
-        await s3_upload(contents= evidence_content_bytes, key=f"Evidence_{response_dict['transaction_id']}.txt", folder = "EVIDENCE", meta_data = evidence_dict)
+        evidence_number = get_evidence_count()
+        await s3_upload(contents= evidence_content_bytes, key=f"Evidence_{evidence_number}.txt", folder = "EVIDENCE", meta_data = evidence_dict)
+        update_evidence_count()
         # return response_dict
     except Exception as e:
         raise HTTPException(
