@@ -33,7 +33,7 @@
 
             if (data.success) {
                 /* set data in store */
-                officer = data
+                // officer = data
 
                 if (data.officerType === "Basic") {
                     console.log("Basic officer successfully connected");
