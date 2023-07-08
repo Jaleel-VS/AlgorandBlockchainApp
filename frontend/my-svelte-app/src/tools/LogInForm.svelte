@@ -3,7 +3,7 @@
     import {push} from 'svelte-spa-router'
 
     //get officer from store
-    import {officer} from 'store.js'
+    // import {officer} from './src/store.js'
 
     // Define initial form data
     let username = "";
