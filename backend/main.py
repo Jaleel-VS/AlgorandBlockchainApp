@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from routes.occurence_route import occurrence_router
 from routes.evidence_route import evidence_router
 from routes.docket_route import docket_router
 from routes.test_route import test_router
@@ -32,3 +32,4 @@ app.add_middleware(
 app.include_router(docket_router)
 app.include_router(test_router)
 app.include_router(evidence_router)
+app.include_router(occurrence_router)

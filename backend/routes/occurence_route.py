@@ -16,7 +16,7 @@ s3_client = boto3.resource('s3')
 
 
 # Post an occurance
-@occurrence_router.post("/log_occurance") 
+@occurrence_router.post("/log_occurrence") 
 async def create_occurrence(occurrence: Occurrence):
     try:
         print(occurrence)
