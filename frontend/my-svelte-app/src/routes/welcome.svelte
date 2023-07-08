@@ -1,5 +1,5 @@
 <script>
-	import {officer} from "../store.js";
+	import {officer} from "../stores.js";
 
 	import CornerLogo from "../tools/Corner_logo.svelte";
 </script>
@@ -14,7 +14,7 @@
 					<h1>Welcome</h1>
 					<h2>Please log in</h2>
 				{:else}
-					<h1>Welcome {$officer.firstName}</h1>
+					<h1>Welcome {$officer.rank} {officer.surname}</h1>
 					<h2>Please select one of the following</h2>
 				{/if}
 			</div>

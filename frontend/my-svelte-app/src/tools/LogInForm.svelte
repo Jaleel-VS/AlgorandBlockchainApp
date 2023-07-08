@@ -3,7 +3,7 @@
     import {push} from 'svelte-spa-router'
 
     //get officer from store
-    // import {officer} from './src/store.js'
+    import {officer} from '../stores.js';
 
     // Define initial form data
     let username = "";
@@ -33,7 +33,7 @@
 
             if (data.success) {
                 /* set data in store */
-                // officer = data
+                Object.assign(officer, data);
 
                 if (data.officerType === "Basic") {
                     console.log("Basic officer successfully connected");
