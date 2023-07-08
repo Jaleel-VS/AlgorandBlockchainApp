@@ -88,13 +88,51 @@
         type="text"
         id="address_2"
         name="address"
-        required
-    /><br /><br />
+        required/>
 
+    <h1 id="v">Additional Information</h1>
+
+    <h2>Occurrence Desciption</h2>
+
+        <input
+            bind:value={id}
+            type="textarea"
+            id="desc"
+            name="desc"
+            required/>
+    
+    <h2>Officer Observation/Any other information</h2>
+
+        <input
+            bind:value={id}
+            type="textarea"
+            id="desc"
+            name="desc"
+            required/>
 
 </form>
 
 <style>
+    #v{
+        color: #091D30;
+        font-size: 30px;
+        margin: auto;
+        text-align: center;
+        margin-top: 2vh;
+        margin-bottom: 1vh;
+    }
+
+    #desc{
+        padding-left: 0.6vh;
+        padding-top: 0.6vh;
+        padding-bottom: 0.6vh;
+        margin-left: 10vh;
+        background-color: rgb(207, 207, 207);
+        height: 25vh;
+        width: 60vh;
+        border-radius: 10px;
+        margin-bottom: 0%;
+    }
     
     h2{
         color: #091D30;

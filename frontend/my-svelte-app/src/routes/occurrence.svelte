@@ -15,41 +15,45 @@
 		</div>
 
         <div class="details">
-            <div class="victim">
+            <div class="victim"> 
                 <h1 id="v">Victim's Details</h1>
                 <OccurForm></OccurForm>
             </div>
-            
         </div>
-        
-        <div class="additional">
-                <h2>Hey there</h2>
-        </div>
-
     </div>
+
+    <button>Submit Occurrence</button>
+
 </main>
 
 <style>
-    .victim{
+    button{
+        background-color: #091d30;
+        color: white;
+        margin-top: 5vh;
+        text-align: center;
+        margin:auto;
+        width: 25vh;
+        height: 6vh;
+        border-radius: 10px;
+    }
+    /* .victim{
         background-color: white;
         width: 75vh;
-    }
-    .additional{
-        background-color: #091D30;
-    }
-    .details{
-        display: flex;
+    } */
+
+    .victim{
         background-color: white;
-        height: 64vh;
+        height: 138vh;
         width: 80vh;
         margin:auto;
         margin-top: 5vh;
-        /* border-radius: 10px; */
+        border-radius: 10px;
     }
 
     .occurrence{
         background-color: #E8E8E8 ;
-		height: 98vh;
+		height: 168vh;
 		align-content: center;
     }
 
