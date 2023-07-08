@@ -37,7 +37,7 @@
 
                 if (data.officerType === "Basic") {
                     console.log("Basic officer successfully connected");
-                    navigate("/occurrence");
+                    push("/welcome");
                 } else if (data.officerType === "Senior") {
                     console.log("Senior officer successfully connected");
                 } else if (data.officerType === "Investigator") {
