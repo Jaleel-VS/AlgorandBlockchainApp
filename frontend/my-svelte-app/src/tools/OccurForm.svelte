@@ -40,7 +40,7 @@
         const backendURL = "http://127.0.0.1:8000/";
 
         try {
-            const response = await fetch(`${backendURL}occurrence`, {
+            const response = await fetch(`${backendURL}log_occurrence`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
