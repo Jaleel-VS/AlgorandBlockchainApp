@@ -19,12 +19,11 @@ s3_client = boto3.resource('s3')
 @occurrence_router.post("/log_occurrence") 
 async def create_occurrence(occurrence: Occurrence):
     try:
-        print(occurrence)
         occurrence_bytes = json.dumps(occurrence.dict()).encode()
         # Sending to Blockchain
         response_dict = dict(send_hash_to_blockchain(occurrence_bytes))
         # Uploading to s3 bucket
-        await s3_upload(contents=occurrence_bytes, key=f"Occurrence_{response_dict['transaction_id']}.txt", folder ="OCCURRENCES/")
+        # await s3_upload(contents=occurrence_bytes, key=f"Occurrence_{response_dict['transaction_id']}.txt", folder ="OCCURRENCES/")
         return response_dict
     except Exception as e:
         raise HTTPException(
