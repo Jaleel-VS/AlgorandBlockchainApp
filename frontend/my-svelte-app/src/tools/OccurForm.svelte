@@ -2,6 +2,7 @@
     let name =""
     let surname =""
     let id =""
+
 </script>
     
 
@@ -110,7 +111,7 @@
             name="desc"
             required/><br /><br />
 
-    <button>Submit Occurrence</button>
+    <button id="occurrence">Submit Occurrence</button>
 
 </form>
 

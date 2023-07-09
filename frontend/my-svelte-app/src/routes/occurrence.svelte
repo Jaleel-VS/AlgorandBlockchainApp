@@ -25,10 +25,6 @@
 </main>
 
 <style>
-    /* .victim{
-        background-color: white;
-        width: 75vh;
-    } */
 
     .victim{
         background-color: white;

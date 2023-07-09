@@ -1,5 +1,8 @@
 <script>
 	import CornerLogo from "../tools/Corner_logo.svelte";
+	// document.getElementById("logButt").onclick = function(){
+	// 	location.href= "/#/occurrence"
+	// }
 </script>
 
 <main>
@@ -15,7 +18,7 @@
 			<div class="occur">
 				<img id="log" src="https://cdn-icons-png.flaticon.com/512/28/28811.png" alt="occur"/>
 				<p>Fill out the log when potential victims visit the station</p>
-				<button>Log Occurrence</button>
+				<button id="logButt">Log Occurrence</button>
 			</div>
 
 			<div class="view">
