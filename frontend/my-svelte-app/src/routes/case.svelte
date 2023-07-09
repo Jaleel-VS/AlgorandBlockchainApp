@@ -14,15 +14,14 @@
 		</div>
         <h1>PART A</h1>
         <h2>OFFENSE DETAILS</h2>
+        
         <div class="body">
-            
             <div class="offense">
                 <p>Select the category under which the offense falls:</p>
                 <form id="offense_type">
                     <input id="once" type = "radio" name = "offense:" value = "Once-off" /> Once-off <br/>
 				    <input id="going" type = "radio" name = "offense:" value = "On-going" /> On-going <br/>
-                </form>
-                <form class="once_ofense">
+
                     <label>Day of offense:
                         <input
                             type="date"
@@ -47,11 +46,7 @@
                         <input type = "checkbox" name = "Crime:" value = 1 /> Gang Related
                         <!-- <input type = "checkbox" name = "Shows:" value = 1 /> Railway Attack -->
                         <input type = "checkbox" name = "Crime:" value = 1 /> Police Involvement
-                </form>
-            </div>
-
-            <div class="description">
-                <form id="offense description">
+                
                     <label>Nature and description of offense:
                     <br/>
                         <input
@@ -69,7 +64,6 @@
                             name="offCode"
                             required
                         />
-
                     </label>
 
                     <label>Nature of property damage/injuries:
@@ -79,15 +73,14 @@
                                 id="offdesc"
                                 name="offdesc"
                                 required/>
-                        </label>
-
+                    </label>
+                    
+                    <input type="submit" id="off_details" value="Submit Offense Details" />
                 </form>
             </div>
-            
            
         </div>
         
-        <button id="off_details">Submit Offense Details</button>
     </div>
 
 </main>
@@ -116,14 +109,14 @@
     height:10vh;
     width: 60vh;
 }
-.description{
+/* .description{
     background-color: grey;
     padding: 2vh;
     color: white;
     width: 70vh;
     margin:5vh 10vh 2vh 5vh;
     height: 45vh;
-}
+} */
 
 p{
     font-weight: bold;
