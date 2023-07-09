@@ -178,7 +178,6 @@
     /><br /><br />
 
     <button>Submit Occurrence</button>
-
 </form>
 
 <style>

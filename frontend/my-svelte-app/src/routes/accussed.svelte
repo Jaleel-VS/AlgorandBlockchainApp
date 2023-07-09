@@ -12,7 +12,6 @@
                 <Navigation></Navigation>
 			</div>
 		</div>
-
         <div class="body">
             <div class="info">
                 <h2>Particulars of Accussed</h2>
@@ -31,6 +30,16 @@
                             id="accsurname"
                             name="accsurname"
                             required >
+                    </label>
+
+                    <label>Identification Number:
+                        <input
+                            type="text"
+                            id="idNum"
+                            name="idNum"
+                            required
+                            placeholder="e.g. 0123456789123"
+                        />
                     </label>
                 </form>
             </div>
