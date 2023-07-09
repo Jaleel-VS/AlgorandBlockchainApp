@@ -2,6 +2,13 @@
     let name =""
     let surname =""
     let id =""
+    let cell=""
+    let homephone=""
+    let email=""
+    let address_1=""
+    let address_2=""
+    let desc =""
+    let officer_obs=""
 </script>
 
 <form on:submit={saveData}>
@@ -48,7 +55,7 @@
         <label
             >Cell:
             <input
-                bind:value={cellnum}
+                bind:value={cell}
                 type="phone"
                 id="cell"
                 name="cell"
