@@ -120,13 +120,6 @@
                                 required
                             />
                         </label>
-
-                        <p>Tick the relevant box:</p>
-
-                        <br />
-                        <input type="checkbox" id="gbv" name="Crime" bind:group={offense_category} value="Gender Based Violence" /> Gender Based Violence
-                        <input type="checkbox" id="gr" name="Crime" bind:group={offense_category} value="Gang Related" /> Gang Related
-                        <input type="checkbox" id="pi" name="Crime" bind:group={offense_category} value="Police Involvement" /> Police Involvement
                     </div>
                 </div>
 
