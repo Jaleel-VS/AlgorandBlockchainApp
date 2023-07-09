@@ -37,31 +37,33 @@
             observations_other_info: officer_obs
         }
 
-        const backendURL = "http://127.0.0.1:8000/";
+        console.log(datadic)
 
-        try {
-            const response = await fetch(`${backendURL}log_occurrence`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(datadic),
-            });
-            const data = await response.json();
-            console.log(data);
+        // const backendURL = "http://127.0.0.1:8000/";
 
-            if (data.success) {
-                console.log("Occurrence successfully logged");
-            }
-            else{
-                console.log(data.message)
-            }
+        // try {
+        //     const response = await fetch(`${backendURL}log_occurrence`, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(datadic),
+        //     });
+        //     const data = await response.json();
+        //     console.log(data);
+
+        //     if (data.success) {
+        //         console.log("Occurrence successfully logged");
+        //     }
+        //     else{
+        //         console.log(data.message)
+        //     }
         
 
-            console.log("Data sent to the backend successfully");
-        } catch (error) {
-            console.error("Error sending data to the backend:", error);
-        }
+        //     console.log("Data sent to the backend successfully");
+        // } catch (error) {
+        //     console.error("Error sending data to the backend:", error);
+        // }
     }
 </script>
 
