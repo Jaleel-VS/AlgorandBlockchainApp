@@ -1,4 +1,6 @@
 <script>
+	import {officer} from "../stores.js";
+
 	import CornerLogo from "../tools/Corner_logo.svelte";
 	// document.getElementById("logButt").onclick = function(){
 	// 	location.href= "/#/occurrence"
@@ -10,8 +12,14 @@
 		<div class="header">
 			<CornerLogo></CornerLogo>
 			<div class="instruction">
-				<h1>Welcome Officer</h1>
-				<h2>Please select one of the following</h2>
+
+				{#if Object.keys($officer).length === 0}
+					<h1>Welcome</h1>
+					<h2>Please log in</h2>
+				{:else}
+					<h1>Welcome {$officer.rank} {officer.surname}</h1>
+					<h2>Please select one of the following</h2>
+				{/if}
 			</div>
 		</div>
 		<div class="body">

@@ -23,6 +23,7 @@ class Transaction:
         )
 
     def __create_transaction(self):
+        print("Creating transaction...")
         txn = transaction.PaymentTxn(
             sender=ADDR,
             sp=self.sp,
@@ -39,9 +40,9 @@ class Transaction:
                 4
             )
 
+
+            print("Transaction confirmed")
             
-
-
         except Exception as e:
             raise e
 

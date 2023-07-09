@@ -1,5 +1,6 @@
 <script>
-	//export let name;
+	//import officeer details from store
+	import { officer } from "./stores.js";
 
 	import Router from "svelte-spa-router";
 	import Login from "./routes/login.svelte";
@@ -15,6 +16,8 @@
 		"/case": Case,
 		"/accussed": Accussed
 	}
+
+	officer.set({})
 </script>
 
 <main>
