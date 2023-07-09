@@ -7,14 +7,14 @@
 	import Welcome from "./routes/welcome.svelte";
 	import Occurrence from "./routes/occurrence.svelte";
 	import Case from "./routes/case.svelte";
-	import Accussed from "./routes/accussed.svelte";
+	import Accused from "./routes/accused.svelte";
 
 	let routes = {
 		"/": Login,
 		"/welcome": Welcome,
 		"/occurrence": Occurrence,
 		"/case": Case,
-		"/accussed": Accussed
+		"/accussed": Accused
 	}
 
 	officer.set({})

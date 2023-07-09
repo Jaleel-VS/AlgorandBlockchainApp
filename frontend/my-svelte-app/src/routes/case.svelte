@@ -12,9 +12,8 @@
                 <Navigation></Navigation>
 			</div>
 		</div>
-        <h1>PART A</h1>
-        <h2>OFFENSE DETAILS</h2>
-        
+        <h1>PART A: Offense Details</h1>
+        <!-- <h2>OFFENSE DETAILS</h2> -->
         <div class="body">
             <div class="offense">
                 <p>Select the category under which the offense falls:</p>
@@ -73,8 +72,7 @@
                                 id="offdesc"
                                 name="offdesc"
                                 required/>
-                    </label>
-                    
+                    </label><br/>
                     <input type="submit" id="off_details" value="Submit Offense Details" />
                 </form>
             </div>
@@ -91,11 +89,11 @@
     background-color: #091d30;
     color: white;
     text-align: center;
-    margin-left: 83vh;
+    margin-left: 18vh;
     width: 35vh;
     height: 6vh;
     border-radius: 10px;
-    margin-top: 2vh ;
+    margin-top: 1vh ;
 }
 
 #offCode{
@@ -130,8 +128,8 @@ label{
     background-color:grey;
     color: white;
     width: 70vh;
-    margin:5vh 5vh 2vh 10vh;
-    height: 45vh;
+    margin:5vh 5vh 2vh 7vh;
+    height: 86vh;
 }
 
 h2{
@@ -149,8 +147,8 @@ h1{
 }
 .body{
     background-color: white;
-    width: 180vh;
-    height: 60vh;
+    width: 87vh;
+    height: 105vh;
     margin: auto;
     display: flex;
 }
@@ -171,7 +169,7 @@ h1{
 
 .docket{
     background-color: #E8E8E8 ;
-	height: 113vh;
+	height: 140vh;
 	align-content: center;
 }
 

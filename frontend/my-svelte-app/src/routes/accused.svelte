@@ -16,6 +16,7 @@
             <div class="info">
                 <h2>Particulars of Accussed</h2>
                 <form class="accInfo">
+                    
                     <label>Name:
                         <input
                             type="text"
@@ -41,6 +42,17 @@
                             placeholder="e.g. 0123456789123"
                         />
                     </label>
+
+                    <label>Date of birth:
+                        <input
+                            type="date"
+                            id="dob"
+                            name="dob"
+                            required
+                        />
+                    </label>
+
+
                 </form>
             </div>
             
