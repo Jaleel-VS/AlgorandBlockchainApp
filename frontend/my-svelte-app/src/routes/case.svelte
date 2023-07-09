@@ -42,22 +42,24 @@
             accused_last_seen: lastSeen
         }
 
-        const backendURL = "http://127.0.0.1:8000/";
+        console.log(dataObject);
 
-        try {
-            const response = await fetch(`${backendURL}case`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(dataObject),
-            });
+        // const backendURL = "http://127.0.0.1:8000/";
 
-            const data = await response.json();
-            console.log(data);
-        } catch (error) {
+        // try {
+        //     const response = await fetch(`${backendURL}case`, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(dataObject),
+        //     });
+
+        //     const data = await response.json();
+        //     console.log(data);
+        // } catch (error) {
             
-        }
+        // }
 
     }
 
