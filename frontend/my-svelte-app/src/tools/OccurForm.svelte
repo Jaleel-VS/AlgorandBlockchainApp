@@ -1,14 +1,68 @@
 <script>
-    let name =""
+ let name =""
     let surname =""
     let id =""
-    let cell=""
+    let cellnum=""
     let homephone=""
     let email=""
     let address_1=""
     let address_2=""
-    let desc =""
+    let desc=""
     let officer_obs=""
+
+    /* FAST API MODEL
+    class Occurrence(BaseModel):
+    #occID: str
+    victim_name: str
+    victim_surname: str
+    victim_ID: str # Their id number 
+    cellphone: str
+    telephone: str
+    email: str
+    residential_address: str
+    occurance_description: str 
+    observations_other_info: str
+    */
+
+    const saveData = async() => {
+        const datadic = {
+            victim_name: name,
+            victim_surname: surname,
+            victim_ID: id,
+            cellphone: cellnum,
+            telephone: homephone,
+            email: email,
+            residential_address: address_1 + " " + address_2,
+            occurance_description: desc,
+            observations_other_info: officer_obs
+        }
+
+        const backendURL = "http://127.0.0.1:8000/";
+
+        try {
+            const response = await fetch(`${backendURL}log_occurrence`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(datadic),
+            });
+            const data = await response.json();
+            console.log(data);
+
+            if (data.success) {
+                console.log("Occurrence successfully logged");
+            }
+            else{
+                console.log(data.message)
+            }
+        
+
+            console.log("Data sent to the backend successfully");
+        } catch (error) {
+            console.error("Error sending data to the backend:", error);
+        }
+    }
 </script>
 
 <form on:submit={saveData}>
@@ -55,7 +109,7 @@
         <label
             >Cell:
             <input
-                bind:value={cell}
+                bind:value={cellnum}
                 type="phone"
                 id="cell"
                 name="cell"
@@ -124,7 +178,6 @@
     /><br /><br />
 
     <button>Submit Occurrence</button>
-
 </form>
 
 <style>
