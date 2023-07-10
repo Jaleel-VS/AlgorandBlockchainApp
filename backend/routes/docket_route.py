@@ -98,7 +98,7 @@ async def submit_docket_changes(docket: Docket, user:UserLogin):
     # Uploading to s3 bucket
     docket_bytes = json.dumps(docket.dict()).encode()
     docket_key = docket["_id"]
-    await s3_upload(contents=docket_bytes, key= docket_key, folder= "DOCKETS")
+    await s3_upload(contents= docket_bytes, key= docket_key, folder= "DOCKETS")
     docket_pending(docket_key)
     update_docket_count()
 
