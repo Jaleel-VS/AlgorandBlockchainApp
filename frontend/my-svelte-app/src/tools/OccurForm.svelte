@@ -139,7 +139,7 @@
             id="email"
             name="email"
             required
-            placeholder="e.g. queen.charlotte@gmail.com"
+            placeholder="e.g. mmabatho.mojapelo@gmail.com"
         />
     </label>
 

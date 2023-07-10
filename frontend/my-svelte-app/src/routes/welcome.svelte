@@ -2,8 +2,17 @@
 	import {officer} from "../stores.js";
 
 	import CornerLogo from "../tools/Corner_logo.svelte";
+
+	import PopUp from "../tools/PopUp.svelte";
 	// document.getElementById("logButt").onclick = function(){
 	// 	location.href= "/#/occurrence"
+	// }
+
+	//For Pop Up 
+	let popUp = document.getElementById(popUp)
+	
+	// function popFunction(){
+	//  	popUp.classList.add("open-popup")
 	// }
 </script>
 
@@ -26,7 +35,7 @@
 			<div class="occur">
 				<img id="log" src="https://cdn-icons-png.flaticon.com/512/28/28811.png" alt="occur"/>
 				<p>Fill out the log when potential victims visit the station</p>
-				<button id="logButt">Log Occurrence</button>
+				<button onclick="popFunction()">Log Occurrence</button>
 			</div>
 
 			<div class="view">
@@ -41,12 +50,39 @@
 				<button>View Tasks</button>
 			</div>
 		</div>
+		<div class="pop" id="popUp">
+			<h1 id="h1Pop">Choose one of the following</h1>
+		</div>
 	</div>
    
 </main>
 
 <style>
  	
+	#h1Pop{
+        color: white;
+    }
+    .pop{
+        text-align: center;
+        background-color: gray;
+        width: 150vh;
+        height: 80vh;
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%,-50%) scale(0.1); 
+        opacity: 90%;
+        visibility: hidden;
+		transition: transform 0.5s, top 0.5s;
+    }
+
+	.open-popup{
+		visibility: visible;
+		top: 50%;
+		transform: translate(-50%,-50%) scale(1);
+	}
+
 	.welcome{
 		background-color: #E8E8E8 ;
 		height: 98vh;
