@@ -8,13 +8,15 @@
 	import Occurrence from "./routes/occurrence.svelte";
 	import Case from "./routes/case.svelte";
 	import Accused from "./routes/accused.svelte";
+	import Dockets from "./routes/dockets.svelte";
 
 	let routes = {
 		"/": Login,
 		"/welcome": Welcome,
 		"/occurrence": Occurrence,
 		"/case": Case,
-		"/accussed": Accused
+		"/accussed": Accused,
+		"/dockets": Dockets,
 	}
 
 	officer.set({})

@@ -49,11 +49,11 @@
         </li>
         <li>|</li>
         <li>
-            <a href="/#/occurrence">VIEW DOCKETS</a>
+            <a href="/#/dockets">VIEW DOCKETS</a>
         </li>
         <li>|</li>
         <li>
-            <a href="/#/occurrence">TASKS</a>
+            <a href="/#/tasks">TASKS</a>
         </li>
     </ul>
         
