@@ -29,23 +29,22 @@
                 body: JSON.stringify(datadic),
             });
             const data = await response.json();
-            console.log(data);
 
             if (data.success) {
                 /* set data in store */
-                Object.assign(officer, data);
+                officer.set(data);
+                
+                console.log($officer)
 
-                if (data.officerType === "Basic") {
-                    console.log("Basic officer successfully connected");
+                if (data.role == "Basic") {
                     push("/welcome");
-                } else if (data.officerType === "Senior") {
-                    console.log("Senior officer successfully connected");
-                } else if (data.officerType === "Investigator") {
-                    console.log("Investigator successfully connected");
+                } else if (data.role == "Senior") {
+                    push("/welcome");
                 }
             }
             else{
                 console.log(data.message)
+                alert("Incorrect username or password")
             }
         
 
@@ -89,6 +88,7 @@
         width: 25vh;
         height: 6vh;
         border-radius: 10px;
+        cursor: pointer;
     }
 
     #name{

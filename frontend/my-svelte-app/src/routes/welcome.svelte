@@ -3,7 +3,7 @@
 
 	import CornerLogo from "../tools/Corner_logo.svelte";
 
-	// import PopUp from "../tools/PopUp.svelte";
+	import PopUp from "../tools/PopUp.svelte";
 	// document.getElementById("logButt").onclick = function(){
 	// 	location.href= "/#/occurrence"
 	// }
@@ -26,7 +26,7 @@
 					<h1>Welcome</h1>
 					<h2>Please log in</h2>
 				{:else}
-					<h1>Welcome {$officer.rank} {officer.surname}</h1>
+					<h1>Welcome {$officer.rank} {$officer.surname}</h1>
 					<h2>Please select one of the following</h2>
 				{/if}
 			</div>
@@ -35,7 +35,7 @@
 			<div class="occur">
 				<img id="log" src="https://cdn-icons-png.flaticon.com/512/28/28811.png" alt="occur"/>
 				<p>Fill out the log when potential victims visit the station</p>
-				<button>Log Occurrence</button>
+				<button onclick="popFunction()">Log Occurrence</button>
 			</div>
 
 			<div class="view">
@@ -116,6 +116,7 @@
 		font-size: 15px;
 		padding: 1vh;
 		width:45vh;
+        cursor: pointer;
 	}
 	
 	p{
