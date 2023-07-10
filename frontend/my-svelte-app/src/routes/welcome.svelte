@@ -3,13 +3,13 @@
 
 	import CornerLogo from "../tools/Corner_logo.svelte";
 
-	import PopUp from "../tools/PopUp.svelte";
+	// import PopUp from "../tools/PopUp.svelte";
 	// document.getElementById("logButt").onclick = function(){
 	// 	location.href= "/#/occurrence"
 	// }
 
 	//For Pop Up 
-	let popUp = document.getElementById(popUp)
+	// let popUp = document.getElementById(popUp)
 	
 	// function popFunction(){
 	//  	popUp.classList.add("open-popup")
@@ -35,7 +35,7 @@
 			<div class="occur">
 				<img id="log" src="https://cdn-icons-png.flaticon.com/512/28/28811.png" alt="occur"/>
 				<p>Fill out the log when potential victims visit the station</p>
-				<button onclick="popFunction()">Log Occurrence</button>
+				<button>Log Occurrence</button>
 			</div>
 
 			<div class="view">
@@ -52,6 +52,15 @@
 		</div>
 		<div class="pop" id="popUp">
 			<h1 id="h1Pop">Choose one of the following</h1>
+			<!-- <div class="choices">
+				
+				<div class="occurOnly">
+					<img id="log" src="https://cdn-icons-png.flaticon.com/512/28/28811.png" alt="occur"/>
+					<p id="log">Log an occurrence only</p>
+					<button>Exit</button>
+				</div>
+
+			</div> -->
 		</div>
 	</div>
    
@@ -59,29 +68,38 @@
 
 <style>
  	
+	#log{
+		font-size: 15px;
+		color: white;
+	}
+
 	#h1Pop{
         color: white;
+		font-size: 40px;
+		margin-top: 5vh;
+		margin:auto;
+		text-align: center;
     }
     .pop{
-        text-align: center;
+        /* text-align: center; */
         background-color: gray;
         width: 150vh;
         height: 80vh;
         border-radius: 10px;
         position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translate(-50%,-50%) scale(0.1); 
+        /* top: 0;
+        left: 50%; */
+        /* transform: translate(-50%,-50%);  */
         opacity: 90%;
-        visibility: hidden;
+        /* visibility: hidden; */
 		transition: transform 0.5s, top 0.5s;
     }
 
-	.open-popup{
+	/* .open-popup{
 		visibility: visible;
 		top: 50%;
 		transform: translate(-50%,-50%) scale(1);
-	}
+	} */
 
 	.welcome{
 		background-color: #E8E8E8 ;
@@ -117,6 +135,15 @@
 		margin: 5vh 10vh 10vh 15vh;
 		text-align: center;
 	}
+
+	.occurOnly{
+		
+		height: 30vh;
+		width: 15vh;
+		margin: 5vh 10vh 10vh 15vh;
+		text-align: center;
+	}
+
 
 	.view{
 		
