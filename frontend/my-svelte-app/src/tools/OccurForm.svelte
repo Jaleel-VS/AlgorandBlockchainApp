@@ -24,7 +24,25 @@
     observations_other_info: str
     */
 
+    const fillFieldsWithDummyData = () =>
+        {
+            name = "Mmabatho"
+            surname = "Mojapelo"
+            id = "0123456789123"
+            cellnum = "(+27)78 256 7765"
+            homephone = "(+27)11 256 7765"
+            email = "mm@gmail.com"
+            address_1 = "1234"
+            address_2 = "Mmabatho Street"
+            desc = "I was robbed"
+            officer_obs = "The victim was very scared"
+
+        }
+
+
     const saveData = async() => {
+        
+        
         const datadic = {
             victim_name: name,
             victim_surname: surname,
@@ -64,6 +82,8 @@
         }
     }
 </script>
+
+<button on:click={fillFieldsWithDummyData}>Fill with dummy data (DELETE LATER)</button>
 
 <form on:submit={saveData}>
     <div class="names">
