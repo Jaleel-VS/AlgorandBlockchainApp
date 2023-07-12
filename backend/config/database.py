@@ -24,13 +24,22 @@ db = client.FairChanceDatabase
 user_collection = db["User_Collection"]
 counters_collection = db["Counters"]
 docket_collection=db["Dockets"]
+occurrence_collection=db["Occurrences"]
 
 #counters_collection.insert_one({"_id": 'Occurrence', "count": 0})
 #counters_collection.insert_one({"_id": 'Docket', "count": 0})
 #counters_collection.insert_one({"_id": 'Evidence', "count": 0})
 
-def insert_docket(docket_name:str, date_time:datetime, user:str):
-    docket_collection.insert_one({"_id": docket_name, "status": status.PENDING.name, "date_created":date_time, "relevant_officer": user})
+def insert_occurrence(occurrence_dict:dict):
+    occurrence_collection.insert_one(occurrence_dict)
+
+def insert_docket(docket_dict:dict):
+    docket_collection.insert_one(docket_dict)
+
+def get_docket(docket_id: str):
+    docket = docket_collection.find_one({"docket_ID": docket_id})
+
+    return docket if docket else None
 
 def docket_approved(docket_name:str, date_time:datetime ):
     filter = {'_id': docket_name}
@@ -85,7 +94,7 @@ def get_tasks(user: UserLogin):
 def update_occ_count():
     filter = { '_id': 'Occurrence' }
     # current value
-    current = get_occ_count()
+    current = int(get_occ_count())
     current += 1
     # Values to be updated.
     newvalue = { "$set": { 'count': current } }
@@ -96,6 +105,8 @@ def update_occ_count():
 def get_occ_count():
     occurrence_number_dict = dict(counters_collection.find_one({"_id": "Occurrence"}))
     occurence_number = occurrence_number_dict['count']
+
+    # f"OCC{occurence_number:04d}"
     return occurence_number
 
 def update_docket_count():

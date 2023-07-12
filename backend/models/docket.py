@@ -3,16 +3,14 @@ from pydantic import BaseModel
 
 
 class Docket(BaseModel):
-    # Generated automatically
-    occ_ID: str # This needs to be passed from mongodb
-    docket_ID:str 
+    occ_ID: str  
+    # docket_ID:str This needs to be passed from mongodb 
     relevant_officer: str
 
     # Offense details 
     offense_category: str 
     day_of_offense: str 
     time_of_offense: str
-    offense_type: str
     offense_description: str
     crime_code: str
     property_damage_or_injuries: str
@@ -25,8 +23,9 @@ class Docket(BaseModel):
     accused_age:str
     accused_description: str
     accused_last_seen: str
-    
-    
-    
+
+    # docket details
+    docket_status: str
+    docket_feedback: list
     
    

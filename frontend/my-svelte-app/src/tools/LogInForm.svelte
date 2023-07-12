@@ -15,6 +15,7 @@
 
         const datadic = { username: username, password: password };
 
+        console.log("Data to be sent to the backend:");
         console.log(datadic);
 
         const backendURL = "http://127.0.0.1:8000/";
@@ -28,7 +29,11 @@
                 },
                 body: JSON.stringify(datadic),
             });
+            
             const data = await response.json();
+
+            console.log("Data received from the backend:");
+            console.log(data);
 
             if (data.success) {
                 /* set data in store */

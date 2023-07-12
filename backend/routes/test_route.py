@@ -21,6 +21,7 @@ async def user_login(user: UserLogin):
         #         "officerType": "senior",
         #         }
         user_dict = dict(user)
+        print(user_dict)
         user_object = user_collection.find_one({"badgeID": user_dict["username"]}, {"_id": 0}) # It returns the entire object
         print(type(user_object))
         if user_object is not None:

@@ -2,7 +2,7 @@
     import CornerLogo from "../tools/Corner_logo.svelte";
     import Navigation from "../tools/Navigation.svelte";
 
-    /* TODO: Fetch dockets from backend */
+    /* TODO: Fetch tasks/dockets from backend */
     /* TODO: Add loading animation */
     let dockets = [
         { number: "123", officer: "Officer A", },
@@ -15,19 +15,20 @@
 <header class="header">
     <CornerLogo />
     <div class="navigation">
-        <h1 id="cd">Dockets</h1>
+        <h1 id="cd">Tasks</h1>
         <Navigation />
     </div>
 </header>
 
 <main class="main-content">
     <!-- Your content here -->
-    <h2>List of Dockets</h2>
+    <h2>List of Tasks</h2>
     <table>
         <thead>
             <tr>
-                <th>Docket Number</th>
-                <th>Officer</th>
+                <th>Task</th>
+                <th>Assigned By</th>
+                <th>Description</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -36,7 +37,7 @@
                 <tr>
                     <td>{docket.number}</td>
                     <td>{docket.officer}</td>
-                    <td><button>View</button></td>
+                    <td><button>Ammend</button></td>
                 </tr>
             {/each}
         </tbody>
