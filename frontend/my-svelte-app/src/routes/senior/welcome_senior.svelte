@@ -1,7 +1,7 @@
 <script>
-	import { officer } from "../stores.js";
+	import { officer } from "../../stores.js";
 
-	import CornerLogo from "../tools/Corner_logo.svelte";
+	import CornerLogo from "../../tools/Corner_logo.svelte";
 
 	import { push } from "svelte-spa-router";
 
@@ -33,20 +33,7 @@
 			</div>
 		</div>
 		<div class="body">
-			<div class="occur">
-				<img
-					id="log"
-					src="https://cdn-icons-png.flaticon.com/512/28/28811.png"
-					alt="occur"
-				/>
-				<p>Fill out the log when potential victims visit the station</p>
-				<button
-					on:click={() => {
-						push("/submit_occurrence");
-					}}>Log Occurrence</button
-				>
-			</div>
-
+			
 			<div class="view">
 				<img
 					id="log"
@@ -56,50 +43,18 @@
 				<p>Fill out the log when potential victims visit the station</p>
 				<button
 					on:click={() => {
-						push("/view_dockets");
-					}}>View Dockets</button
+						push("/review_dockets");
+					}}>View Dockets for Review</button
 				>
 			</div>
 
-			<div class="task">
-				<img
-					id="log"
-					src="https://cdn-icons-png.flaticon.com/512/4345/4345573.png"
-					alt="occur"
-				/>
-				<p>Fill out the log when potential victims visit the station</p>
-				<button
-					on:click={() => {
-						push("/view_tasks");
-					}}>View Tasks</button
-				>
-			</div>
-		</div>
-		<div class="pop" id="popUp">
-			<h1 id="h1Pop">Choose one of the following</h1>
+			
 		</div>
 	</div>
 </main>
 
 <style>
-	#h1Pop {
-		color: white;
-	}
-	.pop {
-		text-align: center;
-		background-color: gray;
-		width: 150vh;
-		height: 80vh;
-		border-radius: 10px;
-		position: absolute;
-		top: 0;
-		left: 50%;
-		transform: translate(-50%, -50%) scale(0.1);
-		opacity: 90%;
-		visibility: hidden;
-		transition: transform 0.5s, top 0.5s;
-	}
-
+	
 	/* .open-popup{
 		visibility: visible;
 		top: 50%;
@@ -131,26 +86,16 @@
 
 	.body {
 		display: flex;
+        justify-content: center;
+        align-items: center;
 	}
 
-	.occur {
-		height: 50vh;
-		width: 45vh;
-		margin: 5vh 10vh 10vh 15vh;
-		text-align: center;
-	}
+
 
 	.view {
-		height: 50vh;
+		/* height: 50vh;
 		width: 45vh;
-		margin: 5vh 10vh 10vh 10vh;
-		text-align: center;
-	}
-
-	.task {
-		height: 50vh;
-		width: 45vh;
-		margin: 5vh 10vh 10vh 10vh;
+		margin: 5vh 10vh 10vh 10vh; */
 		text-align: center;
 	}
 

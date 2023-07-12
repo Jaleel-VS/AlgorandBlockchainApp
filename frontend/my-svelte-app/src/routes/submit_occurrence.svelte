@@ -2,27 +2,12 @@
     import CornerLogo from "../tools/Corner_logo.svelte";
     import Navigation from "../tools/Navigation.svelte";
     import OccurForm from "../tools/OccurForm.svelte";
-    import PopUpModal from "../tools/PopUpModal.svelte";
-    import Modal, { bind } from 'svelte-simple-modal';
-
-    // import modal from stores.js
-    import { modal } from '../stores.js'; 
-
-    const showModal = () => modal.set(bind(PopUpModal, { message: 'Surprise' }));
-
     
 
     
   
 </script>
 <main>
-    <Modal show={$modal}
-    closeButton={false}
-    >
-        <button on:click={showModal}>Show modal</button>
-        
-    </Modal>
-
     <div class="occurrence">
 
         <div class="header">

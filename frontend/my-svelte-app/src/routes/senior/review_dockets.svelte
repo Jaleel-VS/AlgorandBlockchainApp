@@ -1,8 +1,25 @@
 <script>
-    import CornerLogo from "../tools/Corner_logo.svelte";
-    import Navigation from "../tools/Navigation.svelte";
+    import CornerLogo from "../../tools/Corner_logo.svelte";
+    import Navigation from "../../tools/Navigation.svelte";
 
+    let dockets_ = [];
     /* TODO: Fetch dockets from backend */
+
+    const getDockets = async() => {
+        try {
+            fetch("http://localhost:5000/dockets")
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    dockets_ = data;
+                });
+        } catch (error) {
+            
+        }
+    }
+
+
+
     /* TODO: Add loading animation */
     let dockets = [
         { number: "123", officer: "Officer A", },

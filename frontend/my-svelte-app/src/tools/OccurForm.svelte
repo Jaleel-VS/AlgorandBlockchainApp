@@ -1,14 +1,42 @@
 <script>
- let name =""
-    let surname =""
-    let id =""
-    let cellnum=""
-    let homephone=""
-    let email=""
-    let address_1=""
-    let address_2=""
-    let desc=""
-    let officer_obs=""
+    import { push } from "svelte-spa-router";
+
+    import { occurrence, officer } from "../stores.js";
+    import { onMount } from 'svelte';
+
+    const backendURL = "http://127.0.0.1:8000/";
+
+    // get occurernce ID from backend when page loads
+    onMount(async () => {
+        const response = await getOccurrenceID();
+        console.log(response);
+        occurrenceID = response;
+        // set occurrence in store
+        occurrence.set(occurrenceID);
+        
+    });
+
+    const goHome = () => {
+        push("/welcome");
+    };
+
+    const createDocket = () => {
+        push("/submit_docket");
+    };
+
+    let occurrenceSubmitted = false;
+
+    let occurrenceID = "";
+    let name = "";
+    let surname = "";
+    let id = "";
+    let cellnum = "";
+    let homephone = "";
+    let email = "";
+    let address_1 = "";
+    let address_2 = "";
+    let desc = "";
+    let officer_obs = "";
 
     /* FAST API MODEL
     class Occurrence(BaseModel):
@@ -24,26 +52,25 @@
     observations_other_info: str
     */
 
-    const fillFieldsWithDummyData = () =>
-        {
-            name = "Mmabatho"
-            surname = "Mojapelo"
-            id = "0123456789123"
-            cellnum = "(+27)78 256 7765"
-            homephone = "(+27)11 256 7765"
-            email = "mm@gmail.com"
-            address_1 = "1234"
-            address_2 = "Mmabatho Street"
-            desc = "I was robbed"
-            officer_obs = "The victim was very scared"
+    const fillFieldsWithDummyData = () => {
+        name = "Mmabatho";
+        surname = "Mojapelo";
+        id = "0123456789123";
+        cellnum = "(+27)78 256 7765";
+        homephone = "(+27)11 256 7765";
+        email = "mm@gmail.com";
+        address_1 = "1234";
+        address_2 = "Mmabatho Street";
+        desc = "I was robbed";
+        officer_obs = "The victim was very scared";
+    };
 
-        }
-
-
-    const saveData = async() => {
-        
-        
+    const saveData = async () => {
+        const getBadgeNumber = () => {
+            return $officer.badgeID ? $officer.badgeID : "1234567890";
+        };
         const datadic = {
+            // occID: occurrenceID,
             victim_name: name,
             victim_surname: surname,
             victim_ID: id,
@@ -52,10 +79,24 @@
             email: email,
             residential_address: address_1 + " " + address_2,
             occurance_description: desc,
-            observations_other_info: officer_obs
-        }
+            observations_other_info: officer_obs,
+            attending_officer_id: getBadgeNumber(),
+        };
 
-        const backendURL = "http://127.0.0.1:8000/";
+        const dummyDic = {
+            victim_name: "string",
+            victim_surname: "string",
+            victim_ID: "string",
+            cellphone: "string",
+            telephone: "string",
+            email: "string",
+            residential_address: "string",
+            occurance_description: "string",
+            observations_other_info: "string",
+            attending_officer_id: "string",
+        };
+
+        console.log(datadic);
 
         try {
             const response = await fetch(`${backendURL}log_occurrence`, {
@@ -70,22 +111,42 @@
 
             if (data.success) {
                 console.log("Occurrence successfully logged");
+                occurrenceSubmitted = true;
+            } else {
+                console.log(data.message);
             }
-            else{
-                console.log(data.message)
-            }
-        
 
             console.log("Data sent to the backend successfully");
         } catch (error) {
             console.error("Error sending data to the backend:", error);
         }
+    };
+
+    const getOccurrenceID = async() => {
+        try {
+            // get from backend
+            const response = await fetch(`${backendURL}occurrence_number`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            return response.json();
+        }
+        catch (error) {
+            console.error("Error getting occurrence ID:", error);
+        }
+
     }
 </script>
 
-<button on:click={fillFieldsWithDummyData}>Fill with dummy data (DELETE LATER)</button>
+<button on:click={fillFieldsWithDummyData}
+    >Fill with dummy data (DELETE LATER)</button
+>
 
-<form on:submit={saveData}>
+<form on:submit|preventDefault={saveData}>
+    <h2>OCCURRENCE ID: {occurrenceID}</h2>
     <div class="names">
         <label
             >Name:
@@ -196,9 +257,26 @@
         name="desc"
         required
     /><br /><br />
-
-    <button>Submit Occurrence</button>
+    {#if !occurrenceSubmitted}
+        <button>Submit Occurrence</button>
+    {/if}
 </form>
+
+{#if occurrenceSubmitted}
+    <div class="postSubmit">
+        <h2>Occurrence Submitted Successfully!</h2>
+
+        <div class="buttons">
+            <button on:click={goHome}>Exit</button>
+            <button on:click={createDocket}>Create Docket</button>
+        </div>
+
+        <!-- <Modal show={$modal} closeButton={false}>
+    
+    <button on:click={showModal}>Proceed</button>
+    </Modal> -->
+    </div>
+{/if}
 
 <style>
     button {
@@ -307,4 +385,12 @@
         width: 25vh;
         border-radius: 10px;
     }
+
+    /* .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    } */
 </style>
