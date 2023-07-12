@@ -3,7 +3,7 @@
 
 	import CornerLogo from "../tools/Corner_logo.svelte";
 
-	import PopUp from "../tools/PopUp.svelte";
+	
 	// document.getElementById("logButt").onclick = function(){
 	// 	location.href= "/#/occurrence"
 	// }
