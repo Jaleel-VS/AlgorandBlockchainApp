@@ -4,6 +4,7 @@
 	import CornerLogo from "../tools/Corner_logo.svelte";
 
 	import { push } from "svelte-spa-router";
+	
 
 	// import PopUp from "../tools/PopUp.svelte";
 	// document.getElementById("logButt").onclick = function(){
@@ -77,6 +78,15 @@
 		</div>
 		<div class="pop" id="popUp">
 			<h1 id="h1Pop">Choose one of the following</h1>
+			<!-- <div class="choices">
+				
+				<div class="occurOnly">
+					<img id="log" src="https://cdn-icons-png.flaticon.com/512/28/28811.png" alt="occur"/>
+					<p id="log">Log an occurrence only</p>
+					<button>Exit</button>
+				</div>
+
+			</div> -->
 		</div>
 	</div>
 </main>

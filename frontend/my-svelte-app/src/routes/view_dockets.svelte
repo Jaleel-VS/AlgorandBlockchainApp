@@ -61,6 +61,19 @@
 </main>
 
 <style>
+
+button{
+		background-color: #091d30;
+		border-radius: 10px;
+		color: white;
+		font-size: 15px;
+		padding: 1vh;
+		width: 30vh;
+		cursor: pointer;
+        margin: auto;
+        border-color: #091d30;
+	}
+
     .header {
         display: flex;
         background-color: #091d30;

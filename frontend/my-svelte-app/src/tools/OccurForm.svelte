@@ -3,6 +3,7 @@
 
     import { occurrence, officer } from "../stores.js";
     import { onMount } from 'svelte';
+    import PopUp from "./Pop_Up.svelte";
 
     const backendURL = "http://127.0.0.1:8000/";
 

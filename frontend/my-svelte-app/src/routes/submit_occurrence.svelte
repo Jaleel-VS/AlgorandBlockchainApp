@@ -2,7 +2,7 @@
     import CornerLogo from "../tools/Corner_logo.svelte";
     import Navigation from "../tools/Navigation.svelte";
     import OccurForm from "../tools/OccurForm.svelte";
-    
+    import PopUp from "../tools/Pop_Up.svelte";
 
     
   
@@ -15,6 +15,7 @@
 			<div class="navigation">
 				<h1>LOG OCCURRENCE</h1>
                 <Navigation></Navigation>
+                <PopUp></PopUp>
 			</div>
 		</div>
 
