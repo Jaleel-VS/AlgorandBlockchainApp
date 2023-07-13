@@ -5,8 +5,9 @@
 	import Router from "svelte-spa-router";
 	import Login from "./routes/login.svelte";
 	import Welcome from "./routes/welcome.svelte";
-    import ReviseDocket from "./routes/revise_docket.svelte";
+    import ReviseDocket from "./routes/senior/revise_docket.svelte";
     import SubmitDocket from "./routes/submit_docket.svelte";
+    import ReviewDocket from "./routes/review_docket.svelte";
     import ViewDocket from "./routes/view_docket.svelte";
     import ViewDockets from "./routes/view_dockets.svelte";
     import ViewTasks from "./routes/view_tasks.svelte";
@@ -26,6 +27,7 @@
 		"/view_dockets": ViewDockets,
 		"/view_tasks": ViewTasks,
 		"/review_dockets": ReviewDockets,
+		"/review_docket": ReviewDocket,
 	}
 
 	officer.set({})

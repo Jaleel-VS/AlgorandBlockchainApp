@@ -1,32 +1,59 @@
 <script>
     import CornerLogo from "../../tools/Corner_logo.svelte";
     import Navigation from "../../tools/Navigation.svelte";
+    // onmount
+    import { onMount } from "svelte";
 
-    let dockets_ = [];
+    // get dockets from backend on mount
+    const backendURL = "http://127.0.0.1:8000/";
+
+    onMount(async() =>
+    {
+        await getDockets();
+    }
+    )
+
+
+/*    Docket Example From Backend:
+    {
+    "_id": "64aecab236324633063fe6c3",
+    "occ_ID": "31",
+    "relevant_officer": "SAP789",
+    "offense_category": "Once-off",
+    "day_of_offense": "2023-07-12",
+    "time_of_offense": "18:42",
+    "offense_description": "as",
+    "crime_code": "as",
+    "property_damage_or_injuries": "as",
+    "accused_name": "as",
+    "accused_surname": "as",
+    "accused_race": "White",
+    "accused_gender": "Female",
+    "accused_age": "12",
+    "accused_description": "asdad",
+    "accused_last_seen": "2023-07-26",
+    "docket_status": "FOR_REVIEW",
+    "docket_feedback": [],
+    "docket_key": "OCC0001"
+  }, */
+        
+
+    let dockets = [];
     /* TODO: Fetch dockets from backend */
 
     const getDockets = async() => {
         try {
-            fetch("http://localhost:5000/dockets")
+            fetch(`${backendURL}dockets/`)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
-                    dockets_ = data;
+                    dockets = data;
                 });
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
-
-
-    /* TODO: Add loading animation */
-    let dockets = [
-        { number: "123", officer: "Officer A", },
-        { number: "456", officer: "Officer B", },
-        { number: "457", officer: "Officer B", },
-        // ... add as many items as you want
-    ];
 </script>
 
 <header class="header">
@@ -39,7 +66,7 @@
 
 <main class="main-content">
     <!-- Your content here -->
-    <h2>List of Dockets</h2>
+    <h2>Review Dockets</h2>
     <table>
         <thead>
             <tr>
@@ -49,11 +76,11 @@
             </tr>
         </thead>
         <tbody>
-            {#each dockets as docket (docket.number)}
+            {#each dockets as docket (docket._id)}
                 <tr>
-                    <td>{docket.number}</td>
-                    <td>{docket.officer}</td>
-                    <td><button>View</button></td>
+                    <td>{docket.docket_key}</td>
+                    <td>{docket.relevant_officer}</td>
+                    <td><button>Review</button></td>
                 </tr>
             {/each}
         </tbody>

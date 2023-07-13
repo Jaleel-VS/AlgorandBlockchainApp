@@ -2,8 +2,8 @@
     import { onMount } from "svelte";
     // import { useParams } from "svelte-spa-router";
 
-    import CornerLogo from "../tools/Corner_logo.svelte";
-    import Navigation from "../tools/Navigation.svelte";
+    import CornerLogo from "../../tools/Corner_logo.svelte";
+    import Navigation from "../../tools/Navigation.svelte";
 
     /* TODO: Fetch docket from backend */
 

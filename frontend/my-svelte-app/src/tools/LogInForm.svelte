@@ -44,7 +44,7 @@
                 if (data.role == "Basic") {
                     push("/welcome");
                 } else if (data.role == "Senior") {
-                    push("/welcome");
+                    push("/welcome_senior");
                 }
             }
             else{

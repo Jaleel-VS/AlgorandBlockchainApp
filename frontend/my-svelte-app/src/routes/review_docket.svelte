@@ -95,35 +95,47 @@
 
     <div class="offense-info" id="item">
         <h3>Offense Info</h3>
-        <p>Offense Category: {docket_object.offense_category}</p>
-        <p>Day of Offense: {docket_object.day_of_offense}</p>
-        <p>Time of Offense: {docket_object.time_of_offense}</p>
-        <p>Offense Type: {docket_object.offense_type}</p>
-        <p>Offense Description: {docket_object.offense_description}</p>
-        <p>Crime Code: {docket_object.crime_code}</p>
-        <p>
-            Property Damage or Injuries: {docket_object.property_damage_or_injuries}
-        </p>
+        <p>Offense Category:</p>
+        <input bind:value={docket_object.offense_category} />
+        <p>Day of Offense:</p>
+        <input bind:value={docket_object.day_of_offense} />
+        <p>Time of Offense:</p>
+        <input bind:value={docket_object.time_of_offense} />
+        <p>Offense Type:</p>
+        <input bind:value={docket_object.offense_type} />
+        <p>Offense Description:</p>
+        <input bind:value={docket_object.offense_description} />
+        <p>Crime Code:</p>
+        <input bind:value={docket_object.crime_code} />
+        <p>Property Damage or Injuries:</p>
+        <input bind:value={docket_object.property_damage_or_injuries} />
     </div>
-
+    
     <div class="accused-info" id="item">
         <h3>Accused Info</h3>
-        <p>Accused Name: {docket_object.accused_name}</p>
-        <p>Accused Surname: {docket_object.accused_surname}</p>
-        <p>Accused Race: {docket_object.accused_race}</p>
-        <p>Accused Gender: {docket_object.accused_gender}</p>
-        <p>Accused Age: {docket_object.accused_age}</p>
-        <p>Accused Description: {docket_object.accused_description}</p>
-        <p>Accused Last Seen: {docket_object.accused_last_seen}</p>
+        <p>Accused Name:</p>
+        <input bind:value={docket_object.accused_name} />
+        <p>Accused Surname:</p>
+        <input bind:value={docket_object.accused_surname} />
+        <p>Accused Race:</p>
+        <input bind:value={docket_object.accused_race} />
+        <p>Accused Gender:</p>
+        <input bind:value={docket_object.accused_gender} />
+        <p>Accused Age:</p>
+        <input bind:value={docket_object.accused_age} />
+        <p>Accused Description:</p>
+        <input bind:value={docket_object.accused_description} />
+        <p>Accused Last Seen:</p>
+        <input bind:value={docket_object.accused_last_seen} />
     </div>
+    
 
  
 
 </main>
 
 <section>
-    <p>Docket was hashed on {docket_object.hash_date}</p>
-    <a href="{docket_object.hash_link}" target="_blank">View hash on blockchain</a>
+    <button>Submit for Review</button>
 
 </section>
 
