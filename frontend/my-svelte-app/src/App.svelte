@@ -13,6 +13,7 @@
     import SubmitOccurrence from "./routes/submit_occurrence.svelte";
     import WelcomeSenior from "./routes/senior/welcome_senior.svelte";
     import ReviewDockets from "./routes/senior/review_dockets.svelte";
+	import PopUp from "./tools/Pop_Up.svelte";
 
 
 	let routes = {
@@ -26,6 +27,7 @@
 		"/view_dockets": ViewDockets,
 		"/view_tasks": ViewTasks,
 		"/review_dockets": ReviewDockets,
+		"/pop_up":PopUp
 	}
 
 	officer.set({})

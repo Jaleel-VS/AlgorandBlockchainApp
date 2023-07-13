@@ -4,6 +4,7 @@
 	import CornerLogo from "../tools/Corner_logo.svelte";
 
 	import { push } from "svelte-spa-router";
+	
 
 	// import PopUp from "../tools/PopUp.svelte";
 	// document.getElementById("logButt").onclick = function(){
