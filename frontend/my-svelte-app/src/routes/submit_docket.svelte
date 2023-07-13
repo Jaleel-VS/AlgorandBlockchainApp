@@ -35,7 +35,6 @@
             offense_category: offense_category,
             day_of_offense: offdate,
             time_of_offense: offTime,
-            offense_type: offense_type,
             offense_description: offdesc,
             crime_code: offCode,
             property_damage_or_injuries: offNature,

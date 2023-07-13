@@ -22,7 +22,7 @@
 		"/welcome": Welcome,
 		"/welcome_senior": WelcomeSenior,
 		"/submit_occurrence": SubmitOccurrence,
-		"/revise_docket": ReviseDocket,
+		"/revise_docket/:id": ReviseDocket,
 		"/submit_docket": SubmitDocket,
 		"/view_docket": ViewDocket,
 		"/view_dockets": ViewDockets,
