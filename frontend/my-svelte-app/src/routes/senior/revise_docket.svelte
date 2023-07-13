@@ -1,23 +1,31 @@
 <script>
     import { onMount } from "svelte";
-    // import { useParams } from "svelte-spa-router";
+    import { params } from 'svelte-spa-router';
 
     import CornerLogo from "../../tools/Corner_logo.svelte";
     import Navigation from "../../tools/Navigation.svelte";
 
+
+    // Subscribe to params to get the id
+    $params.subscribe(($params) => {
+        docketId = $params.id;
+    });
+
+    const backendURL = "http://127.0.0.1:8000/";
+
     /* TODO: Fetch docket from backend */
 
-    // let docket = null;
+    let docket = null;
 
     // const { id } = useParams();
 
-    // onMount(async () => {
-    //     const res = await fetch(`/api/dockets/${id}`);
-    //     docket = await res.json();
-    // });
+    onMount(async () => {
+        const res = await fetch(`${backendURL}dockets/${docketId}`);
+        docket = await res.json();
+    });
 
     /* TODO: Add loading animation */
-    // let _ = {
+    // let docket_object = {
     //     // docket info
     //     occ_ID: docket.occ_ID,
     //     docket_ID: docket.docket_ID,
