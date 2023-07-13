@@ -41,5 +41,5 @@ async def create_occurrence(occurrence: Occurrence):
     
 @occurrence_router.get("/occurrence_number")
 async def get_occurrence_number():
-    return get_occ_count()
+    return  f"OCC{get_occ_count():04d}"
     

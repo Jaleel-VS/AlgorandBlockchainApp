@@ -37,9 +37,15 @@ def insert_docket(docket_dict:dict):
     docket_collection.insert_one(docket_dict)
 
 def get_docket(docket_id: str):
-    docket = docket_collection.find_one({"docket_ID": docket_id})
+    docket = docket_collection.find_one({"docket_key": docket_id}, {"_id": 0})
 
     return docket if docket else None
+
+async def get_all_dockets():
+    dockets = docket_collection.find({})
+    dockets_dicts = [docket.dict() for docket in dockets]
+    return list(dockets_dicts)
+    
 
 def docket_approved(docket_name:str, date_time:datetime ):
     filter = {'_id': docket_name}

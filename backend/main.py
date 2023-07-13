@@ -4,6 +4,8 @@ from routes.evidence_route import evidence_router
 from routes.docket_route import docket_router
 from routes.test_route import test_router
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
+
 
 app = FastAPI()
 
@@ -33,3 +35,7 @@ app.include_router(docket_router)
 app.include_router(test_router)
 app.include_router(evidence_router)
 app.include_router(occurrence_router)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app)

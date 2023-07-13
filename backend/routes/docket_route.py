@@ -1,4 +1,5 @@
 # Program for sending dockets to s3 bucket
+from typing import List
 import boto3
 from fastapi import APIRouter, UploadFile, HTTPException, status
 from models.docket import Docket
@@ -8,11 +9,12 @@ from config.database import (
     get_docket_count, update_docket_count,
       insert_docket, docket_approved, docket_declined, get_all_dockets,
         docket_pending, get_declined_dockets, get_approved_dockets, get_pending_dockets, 
-        get_tasks, get_docket)
+        get_tasks, get_docket, get_all_dockets, docket_collection)
 from services.transaction import Transaction
 from services.utils import get_hash
 from utils.helper import send_hash_to_blockchain, s3_upload, s3_resource
 from datetime import datetime
+from bson import ObjectId
 import json
 import os
 
@@ -133,6 +135,24 @@ docket_router = APIRouter()
 #     await s3_upload(contents=docket_bytes, key= docket_key, folder= "DOCKETS")
 #     # blockchain add (walahi im finished haha)
 
+
+@docket_router.get("/dockets")
+async def get_all_dockets():
+    try:
+        print("Getting all dockets")
+        dockets = docket_collection.find()
+        dockets = [{k: (str(v) if isinstance(v, ObjectId) else v) for k, v in docket.items()} for docket in dockets]
+
+
+        return dockets
+    
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
+
+
 @docket_router.post("/submit_initial_docket")
 async def submit_initial_docket(docket: Docket):
     try:
@@ -158,12 +178,11 @@ async def submit_initial_docket(docket: Docket):
     
 
 
-@docket_router.get("docket")
+@docket_router.get("/docket")
 async def get_docket_from_db(docket_id: str):
     docket = get_docket(docket_id)
 
     if docket:
-        docket = docket.dict()
         docket.update(
             {"success": True}
         )
