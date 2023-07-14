@@ -32,6 +32,10 @@
 					<h2>Please select one of the following</h2>
 				{/if}
 			</div>
+			<div class="logOut">
+				<!-- <img id = "log_out" src="https://cdn-icons-png.flaticon.com/512/152/152534.png" alt="log_out"> -->
+				<a id="link" href="/">Log Out</a> 
+			</div>
 		</div>
 		<div class="body">
 			<div class="occur">
@@ -92,6 +96,31 @@
 </main>
 
 <style>
+
+	link{
+		font-size: 15px;
+	}
+
+	a{
+		margin: 0%;
+		color: white;
+
+	}
+
+	.logOut{
+		display:grid;
+		margin-left: 75vh;
+		margin-top: 10vh;
+	}
+
+	/* #log_out{
+	
+		margin:0%;
+		margin-left: 1vh;
+		width: 10vh;
+		height: 10vh;
+	} */
+
 	#h1Pop {
 		color: white;
 	}
@@ -123,6 +152,7 @@
 	}
 
 	/* Body */
+
 
 	button {
 		background-color: #091d30;
