@@ -19,7 +19,6 @@
     }
 
 
-
     /* TODO: Add loading animation */
     let dockets = [
         { number: "123", officer: "Officer A", },
@@ -128,7 +127,7 @@ button{
     }
 
     button {
-        background-color: #4CAF50; /* Green */
+        background-color: #091d30;
         border: none;
         color: white;
         padding: 15px 32px;
@@ -138,6 +137,7 @@ button{
         font-size: 16px;
         transition-duration: 0.4s;
         cursor: pointer;
+        border-radius: 10px;
     }
 
     button:hover {

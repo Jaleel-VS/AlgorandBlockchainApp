@@ -272,10 +272,6 @@
             <button on:click={createDocket}>Create Docket</button>
         </div>
 
-        <!-- <Modal show={$modal} closeButton={false}>
-    
-    <button on:click={showModal}>Proceed</button>
-    </Modal> -->
     </div>
 {/if}
 
