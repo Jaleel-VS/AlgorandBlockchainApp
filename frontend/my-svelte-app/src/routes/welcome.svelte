@@ -97,9 +97,6 @@
 
 <style>
 
-	link{
-		font-size: 15px;
-	}
 
 	a{
 		margin: 0%;
