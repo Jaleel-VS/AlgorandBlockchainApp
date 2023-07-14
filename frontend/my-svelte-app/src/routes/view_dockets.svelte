@@ -1,31 +1,35 @@
 <script>
     import CornerLogo from "../tools/Corner_logo.svelte";
     import Navigation from "../tools/Navigation.svelte";
+    import { onMount } from "svelte";
+    import { push } from "svelte-spa-router";
 
-    let dockets_ = [];
+
+    // get dockets from backend on mount
+    const backendURL = "http://127.0.0.1:8000/";
+
+    onMount(async () => {
+        await getDockets();
+    });
+
+    let dockets = [];
     /* TODO: Fetch dockets from backend */
 
-    const getDockets = async() => {
+    const getDockets = async () => {
         try {
-            fetch("http://localhost:5000/dockets")
+            fetch(`${backendURL}dockets/`)
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
-                    dockets_ = data;
+                    // filter only dockets that are for review
+                    console.log(data)
+                    dockets = data;
                 });
         } catch (error) {
-            
+            console.log(error);
         }
-    }
-
+    };
 
     /* TODO: Add loading animation */
-    let dockets = [
-        { number: "123", officer: "Officer A", },
-        { number: "456", officer: "Officer B", },
-        { number: "457", officer: "Officer B", },
-        // ... add as many items as you want
-    ];
 </script>
 
 <header class="header">
@@ -36,6 +40,7 @@
     </div>
 </header>
 
+{#if dockets}
 <main class="main-content">
     <!-- Your content here -->
     <h2>List of Dockets</h2>
@@ -44,34 +49,38 @@
             <tr>
                 <th>Docket Number</th>
                 <th>Officer</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            {#each dockets as docket (docket.number)}
+            {#each dockets as docket (docket._id)}
                 <tr>
-                    <td>{docket.number}</td>
-                    <td>{docket.officer}</td>
-                    <td><button>View</button></td>
+                    <td>{docket.docket_key}</td>
+                    <td>{docket.relevant_officer}</td>
+                    <td>{docket.docket_status}</td>
+                    <td><button
+                        on:click={() => {push(`/view_docket/${docket.docket_key}`)}}
+                        >View</button></td>
                 </tr>
             {/each}
         </tbody>
     </table>
 </main>
+{/if}
 
 <style>
-
-button{
-		background-color: #091d30;
-		border-radius: 10px;
-		color: white;
-		font-size: 15px;
-		padding: 1vh;
-		width: 30vh;
-		cursor: pointer;
+    button {
+        background-color: #091d30;
+        border-radius: 10px;
+        color: white;
+        font-size: 15px;
+        padding: 1vh;
+        width: 30vh;
+        cursor: pointer;
         margin: auto;
         border-color: #091d30;
-	}
+    }
 
     .header {
         display: flex;
@@ -95,7 +104,6 @@ button{
         font-size: 50px;
         margin-bottom: 2vh;
     }
-
     .main-content {
         display: flex;
         /* justify-content: center; */
@@ -116,7 +124,8 @@ button{
         border-collapse: collapse;
     }
 
-    th, td {
+    th,
+    td {
         border: 1px solid #000;
         padding: 1rem;
         text-align: left;
@@ -127,7 +136,7 @@ button{
     }
 
     button {
-        background-color: #091d30;
+        background-color: #4caf50; /* Green */
         border: none;
         color: white;
         padding: 15px 32px;
@@ -137,10 +146,9 @@ button{
         font-size: 16px;
         transition-duration: 0.4s;
         cursor: pointer;
-        border-radius: 10px;
     }
 
     button:hover {
-        background-color:darkgreen;
+        background-color: darkgreen;
     }
 </style>
