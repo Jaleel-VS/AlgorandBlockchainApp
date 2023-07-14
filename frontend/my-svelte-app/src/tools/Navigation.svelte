@@ -62,12 +62,13 @@
 
 <style>
 
-    a{
+    a {
         color: white;
     }
     ul{
         margin-left: 47.5vh;
         display: flex;
+        flex-wrap: wrap;
     }
 
     li{

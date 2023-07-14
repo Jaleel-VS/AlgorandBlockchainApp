@@ -1,47 +1,27 @@
 <script>
     import { onMount } from "svelte";
-    // import { useParams } from "svelte-spa-router";
 
     import CornerLogo from "../tools/Corner_logo.svelte";
     import Navigation from "../tools/Navigation.svelte";
 
-    /* TODO: Fetch docket from backend */
-
-    // let docket = null;
-
-    // const { id } = useParams();
-
-    // onMount(async () => {
-    //     const res = await fetch(`/api/dockets/${id}`);
-    //     docket = await res.json();
-    // });
-
-    /* TODO: Add loading animation */
-    // let _ = {
-    //     // docket info
-    //     occ_ID: docket.occ_ID,
-    //     docket_ID: docket.docket_ID,
-    //     relevant_officer: docket.relevant_officer,
-
-    //     // offense info
-    //     offense_category: docket.offense_category,
-    //     day_of_offense: docket.day_of_offense,
-    //     time_of_offense: docket.time_of_offense,
-    //     offense_type: docket.offense_type,
-    //     offense_description: docket.offense_description,
-    //     crime_code: docket.crime_code,
-    //     property_damage_or_injuries: docket.property_damage_or_injuries,
-
-    //     // accused info
-    //     accused_name: docket.accused_name,
-    //     accused_surname: docket.accused_surname,
-    //     accused_race: docket.accused_race,
-    //     accused_gender: docket.accused_gender,
-    //     accused_age: docket.accused_age,
-    //     accused_description: docket.accused_description,
-    //     accused_last_seen: docket.accused_last_seen,
-    // };
+    let docketId = null;
     
+    const backendURL = "http://127.0.0.1:8000/";
+
+    let docket = null;
+
+    export let params = {};
+
+
+    onMount(async () => {
+        // Example GET REQUEST: http://127.0.0.1:8000/docket?docket_id=DOC0002
+        docketId = params.id;
+        const res = await fetch(`${backendURL}docket/?docket_id=${docketId}`);
+        docket = await res.json();
+    });
+
+
+
 
     let docket_object = {
         occ_ID: "123456789",
@@ -82,39 +62,54 @@
 
 <h2>Docket Information</h2>
 
-
+{#if docket}
 <main class="main-content">
     <!-- Your content here -->
 
-    <div class="docket-info" id="item">
-        <h3>Docket Info</h3>
-        <p>Occurrence ID: {docket_object.occ_ID}</p>
-        <p>Docket ID: {docket_object.docket_ID}</p>
-        <p>Relevant Officer: {docket_object.relevant_officer}</p>
+    <div class="docket-info" >
+        <div class="feed" id="item">
+            <h3> Feedback </h3>
+
+            {#if docket.docket_feedback} 
+
+            {#each docket.docket_feedback as feedback}
+                <p>{feedback}</p>
+            {/each}
+
+            {:else}
+
+            <p>No previous feedback</p>
+            {/if}
+        </div>
+        <div class="info"id="item">
+            <h3>Docket Info</h3>
+            <p>Occurrence ID: {docket.occ_ID}</p>
+            <p>Docket ID: {docket.docket_key}</p>
+            <p>Relevant Officer: {docket.relevant_officer}</p>
+        </div>
     </div>
 
     <div class="offense-info" id="item">
         <h3>Offense Info</h3>
-        <p>Offense Category: {docket_object.offense_category}</p>
-        <p>Day of Offense: {docket_object.day_of_offense}</p>
-        <p>Time of Offense: {docket_object.time_of_offense}</p>
-        <p>Offense Type: {docket_object.offense_type}</p>
-        <p>Offense Description: {docket_object.offense_description}</p>
-        <p>Crime Code: {docket_object.crime_code}</p>
+        <p>Offense Category: {docket.offense_category}</p>
+        <p>Day of Offense: {docket.day_of_offense}</p>
+        <p>Time of Offense: {docket.time_of_offense}</p>
+        <p>Offense Description: {docket.offense_description}</p>
+        <p>Crime Code: {docket.crime_code}</p>
         <p>
-            Property Damage or Injuries: {docket_object.property_damage_or_injuries}
+            Property Damage or Injuries: {docket.property_damage_or_injuries}
         </p>
     </div>
 
     <div class="accused-info" id="item">
         <h3>Accused Info</h3>
-        <p>Accused Name: {docket_object.accused_name}</p>
-        <p>Accused Surname: {docket_object.accused_surname}</p>
-        <p>Accused Race: {docket_object.accused_race}</p>
-        <p>Accused Gender: {docket_object.accused_gender}</p>
-        <p>Accused Age: {docket_object.accused_age}</p>
-        <p>Accused Description: {docket_object.accused_description}</p>
-        <p>Accused Last Seen: {docket_object.accused_last_seen}</p>
+        <p>Accused Name: {docket.accused_name}</p>
+        <p>Accused Surname: {docket.accused_surname}</p>
+        <p>Accused Race: {docket.accused_race}</p>
+        <p>Accused Gender: {docket.accused_gender}</p>
+        <p>Accused Age: {docket.accused_age}</p>
+        <p>Accused Description: {docket.accused_description}</p>
+        <p>Accused Last Seen: {docket.accused_last_seen}</p>
     </div>
 
  
@@ -122,11 +117,17 @@
 </main>
 
 <section>
-    <p>Docket was hashed on {docket_object.hash_date}</p>
-    <a href="{docket_object.hash_link}" target="_blank">View hash on blockchain</a>
+    {#if docket.transcation_addresses}
 
+    <h3>Transaction Addresses</h3>
+    <p>The content of this docket and subsequent changes have been hashed <br> These hashes have been stored at the following addresses:</p>
+    {#each docket.transcation_addresses as address}
+    <!-- use anchor tags -->
+    <a href="{address}" target="_blank">Transaction</a>
+    {/each}
+    {/if}
 </section>
-
+{/if}
 
 
 <style>
@@ -172,7 +173,7 @@
         border-radius: 8px;
         padding: 1rem;
         margin: 1rem;
-        width: 30%;
+        width: 25rem;
         height: auto;
 
     }

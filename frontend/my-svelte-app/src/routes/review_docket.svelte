@@ -1,47 +1,29 @@
 <script>
     import { onMount } from "svelte";
-    // import { useParams } from "svelte-spa-router";
+    import { push } from "svelte-spa-router";
+
+
+    export let params = {};
 
     import CornerLogo from "../tools/Corner_logo.svelte";
     import Navigation from "../tools/Navigation.svelte";
 
-    /* TODO: Fetch docket from backend */
-
-    // let docket = null;
-
-    // const { id } = useParams();
-
-    // onMount(async () => {
-    //     const res = await fetch(`/api/dockets/${id}`);
-    //     docket = await res.json();
-    // });
-
-    /* TODO: Add loading animation */
-    // let _ = {
-    //     // docket info
-    //     occ_ID: docket.occ_ID,
-    //     docket_ID: docket.docket_ID,
-    //     relevant_officer: docket.relevant_officer,
-
-    //     // offense info
-    //     offense_category: docket.offense_category,
-    //     day_of_offense: docket.day_of_offense,
-    //     time_of_offense: docket.time_of_offense,
-    //     offense_type: docket.offense_type,
-    //     offense_description: docket.offense_description,
-    //     crime_code: docket.crime_code,
-    //     property_damage_or_injuries: docket.property_damage_or_injuries,
-
-    //     // accused info
-    //     accused_name: docket.accused_name,
-    //     accused_surname: docket.accused_surname,
-    //     accused_race: docket.accused_race,
-    //     accused_gender: docket.accused_gender,
-    //     accused_age: docket.accused_age,
-    //     accused_description: docket.accused_description,
-    //     accused_last_seen: docket.accused_last_seen,
-    // };
+    let docketId = null;
     
+    const backendURL = "http://127.0.0.1:8000/";
+
+    let docket = null;
+
+    onMount(async () => {
+        // Example GET REQUEST: http://127.0.0.1:8000/docket?docket_id=DOC0002
+        docketId = params.id;
+        const res = await fetch(`${backendURL}docket/?docket_id=${docketId}`);
+        docket = await res.json();
+    });
+
+
+
+
 
     let docket_object = {
         occ_ID: "123456789",
@@ -70,6 +52,29 @@
         hash_link: "https://i",
         hash_date: "2021-05-02",
     };
+
+
+    const submitDocket = async() => {
+        try {
+            const response = await fetch(`${backendURL}submit_docket_for_review?docket_id=${docketId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(docket),
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            if (data.success) {
+                alert("Docket submitted for review");
+                push("/welcome");
+            }
+        } catch (error) {
+
+        }
+    }
 </script>
 
 <header class="header">
@@ -82,51 +87,65 @@
 
 <h2>Docket Information</h2>
 
-
+{#if docket}
 <main class="main-content">
     <!-- Your content here -->
 
-    <div class="docket-info" id="item">
-        <h3>Docket Info</h3>
-        <p>Occurrence ID: {docket_object.occ_ID}</p>
-        <p>Docket ID: {docket_object.docket_ID}</p>
-        <p>Relevant Officer: {docket_object.relevant_officer}</p>
+    <div class="docket-info" >
+        <div class="feed" id="item">
+            <h3> Feedback </h3>
+
+            {#if docket.docket_feedback} 
+
+            {#each docket.docket_feedback as feedback}
+                <p>{feedback}</p>
+            {/each}
+
+            {:else}
+
+            <p>No previous feedback</p>
+            {/if}
+        </div>
+        <div class="info"id="item">
+            <h3>Docket Info</h3>
+            <p>Occurrence ID: {docket.occ_ID}</p>
+            <p>Docket ID: {docket.docket_key}</p>
+            <p>Relevant Officer: {docket.relevant_officer}</p>
+        </div>
     </div>
 
     <div class="offense-info" id="item">
         <h3>Offense Info</h3>
         <p>Offense Category:</p>
-        <input bind:value={docket_object.offense_category} />
+        <input bind:value={docket.offense_category} />
         <p>Day of Offense:</p>
-        <input bind:value={docket_object.day_of_offense} />
+        <input bind:value={docket.day_of_offense} />
         <p>Time of Offense:</p>
-        <input bind:value={docket_object.time_of_offense} />
-        <p>Offense Type:</p>
-        <input bind:value={docket_object.offense_type} />
+        <input bind:value={docket.time_of_offense} />
         <p>Offense Description:</p>
-        <input bind:value={docket_object.offense_description} />
+        <input bind:value={docket.offense_description} />
         <p>Crime Code:</p>
-        <input bind:value={docket_object.crime_code} />
+        <input bind:value={docket.crime_code} />
         <p>Property Damage or Injuries:</p>
-        <input bind:value={docket_object.property_damage_or_injuries} />
+        <input bind:value={docket.property_damage_or_injuries} />
     </div>
     
     <div class="accused-info" id="item">
         <h3>Accused Info</h3>
         <p>Accused Name:</p>
-        <input bind:value={docket_object.accused_name} />
+        <input bind:value={docket.accused_name} />
         <p>Accused Surname:</p>
-        <input bind:value={docket_object.accused_surname} />
+        <input bind:value={docket.accused_surname} />
         <p>Accused Race:</p>
-        <input bind:value={docket_object.accused_race} />
+        <input bind:value={docket.accused_race} />
         <p>Accused Gender:</p>
-        <input bind:value={docket_object.accused_gender} />
+        <input bind:value={docket.accused_gender} />
         <p>Accused Age:</p>
-        <input bind:value={docket_object.accused_age} />
+        <input bind:value={docket.accused_age} />
         <p>Accused Description:</p>
-        <input bind:value={docket_object.accused_description} />
+        <input bind:value={docket.accused_description} />
         <p>Accused Last Seen:</p>
-        <input bind:value={docket_object.accused_last_seen} />
+        <input bind:value={docket.accused_last_seen} />
     </div>
     
 
@@ -135,9 +154,17 @@
 </main>
 
 <section>
-    <button>Submit for Review</button>
+    <button
+        on:click={
+            () => {
+                submitDocket()
+            }
+        }
+    >Submit for Review</button>
 
 </section>
+{/if}
+
 
 
 
@@ -174,6 +201,7 @@
         justify-content: center;
         /* align-items: center; */
         flex-direction: row;
+        flex-wrap: wrap;
         background-color: #d3d3d3; /* This is light gray color. Adjust to your liking */
         min-height: auto; /* Adjust to your liking */
         padding: 1rem; /* Adjust to your liking */
@@ -184,13 +212,18 @@
         border-radius: 8px;
         padding: 1rem;
         margin: 1rem;
-        width: 30%;
+        width: 25rem;
         height: auto;
 
     }
 
     h2 {
         margin-bottom: 1rem;
+    }
+
+    .docket-info {
+        display: flex;
+        flex-direction: column;
     }
 
     section {

@@ -3,6 +3,7 @@
     import Navigation from "../../tools/Navigation.svelte";
     // onmount
     import { onMount } from "svelte";
+    import {push} from "svelte-spa-router";
 
     // get dockets from backend on mount
     const backendURL = "http://127.0.0.1:8000/";
@@ -14,30 +15,6 @@
     )
 
 
-/*    Docket Example From Backend:
-    {
-    "_id": "64aecab236324633063fe6c3",
-    "occ_ID": "31",
-    "relevant_officer": "SAP789",
-    "offense_category": "Once-off",
-    "day_of_offense": "2023-07-12",
-    "time_of_offense": "18:42",
-    "offense_description": "as",
-    "crime_code": "as",
-    "property_damage_or_injuries": "as",
-    "accused_name": "as",
-    "accused_surname": "as",
-    "accused_race": "White",
-    "accused_gender": "Female",
-    "accused_age": "12",
-    "accused_description": "asdad",
-    "accused_last_seen": "2023-07-26",
-    "docket_status": "FOR_REVIEW",
-    "docket_feedback": [],
-    "docket_key": "OCC0001"
-  }, */
-        
-
     let dockets = [];
     /* TODO: Fetch dockets from backend */
 
@@ -46,8 +23,8 @@
             fetch(`${backendURL}dockets/`)
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
-                    dockets = data;
+                    // filter only dockets that are for review
+                    dockets = data.filter((docket) => docket.docket_status === "FOR_REVIEW");
                 });
         } catch (error) {
             console.log(error);
@@ -80,7 +57,9 @@
                 <tr>
                     <td>{docket.docket_key}</td>
                     <td>{docket.relevant_officer}</td>
-                    <td><button>Review</button></td>
+                    <td><button
+                        on:click={() => {push(`/revise_docket/${docket.docket_key}`)}}
+                        >Review</button></td>
                 </tr>
             {/each}
         </tbody>

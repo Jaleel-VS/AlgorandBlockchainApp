@@ -2,14 +2,37 @@
     import CornerLogo from "../tools/Corner_logo.svelte";
     import Navigation from "../tools/Navigation.svelte";
 
+    import { onMount } from "svelte";
+
+    import {push} from "svelte-spa-router";
+
     /* TODO: Fetch tasks/dockets from backend */
-    /* TODO: Add loading animation */
-    let dockets = [
-        { number: "123", officer: "Officer A", },
-        { number: "456", officer: "Officer B", },
-        { number: "457", officer: "Officer B", },
-        // ... add as many items as you want
-    ];
+    
+    const backendURL = "http://127.0.0.1:8000/";
+
+    onMount(async() =>
+    {
+        await getDockets();
+    }
+    )
+
+    let dockets = [];
+
+    const getDockets = async() => {
+        try {
+            fetch(`${backendURL}dockets/`)
+                .then((response) => response.json())
+                .then((data) => {
+                    // filter only dockets that are for review
+                    dockets = data.filter((docket) => docket.docket_status === "PENDING");
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
 </script>
 
 <header class="header">
@@ -26,18 +49,17 @@
     <table>
         <thead>
             <tr>
-                <th>Task</th>
-                <th>Assigned By</th>
-                <th>Description</th>
+                <th>Docket ID</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            {#each dockets as docket (docket.number)}
+            {#each dockets as docket (docket._id)}
                 <tr>
-                    <td>{docket.number}</td>
-                    <td>{docket.officer}</td>
-                    <td><button>Ammend</button></td>
+                    <td>{docket.docket_key}</td>
+                    <td><button
+                        on:click={() => {push(`/review_docket/${docket.docket_key}`)}}
+                        >Ammend</button></td>
                 </tr>
             {/each}
         </tbody>

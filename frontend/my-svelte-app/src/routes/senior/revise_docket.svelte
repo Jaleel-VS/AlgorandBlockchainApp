@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import{officer} from "../../stores.js";
     // import { params } from 'svelte-spa-router';
 
     export let params = {};
@@ -7,6 +8,7 @@
 
     import CornerLogo from "../../tools/Corner_logo.svelte";
     import Navigation from "../../tools/Navigation.svelte";
+    import { push } from "svelte-spa-router";
 
 
     // Subscribe to params to get the id
@@ -19,80 +21,96 @@
     /* TODO: Fetch docket from backend */
 
     let docket = null;
+    let feedback = "";
 
-    // const { id } = useParams();
-    // const unsubscribe = params.subscribe(($params) => {
-    // if ($params && $params.id) {
-    //     docketId = $params.id;
-    // }
-    // });
+
 
     onMount(async () => {
         // Example GET REQUEST: http://127.0.0.1:8000/docket?docket_id=DOC0002
         docketId = params.id;
         const res = await fetch(`${backendURL}docket/?docket_id=${docketId}`);
         docket = await res.json();
+        console.log(docket);
+        console.log(docket.occ_ID);
     });
 
-    /* TODO: Add loading animation */
-    // let docket_object = {
-    //     // docket info
-    //     occ_ID: docket.occ_ID,
-    //     docket_ID: docket.docket_ID,
-    //     relevant_officer: docket.relevant_officer,
-
-    //     // offense info
-    //     offense_category: docket.offense_category,
-    //     day_of_offense: docket.day_of_offense,
-    //     time_of_offense: docket.time_of_offense,
-    //     offense_type: docket.offense_type,
-    //     offense_description: docket.offense_description,
-    //     crime_code: docket.crime_code,
-    //     property_damage_or_injuries: docket.property_damage_or_injuries,
-
-    //     // accused info
-    //     accused_name: docket.accused_name,
-    //     accused_surname: docket.accused_surname,
-    //     accused_race: docket.accused_race,
-    //     accused_gender: docket.accused_gender,
-    //     accused_age: docket.accused_age,
-    //     accused_description: docket.accused_description,
-    //     accused_last_seen: docket.accused_last_seen,
-    // };
-
-    let docket_object = {
-        occ_ID: "123456789",
-        docket_ID: "123456789",
-        relevant_officer: "John Doe",
-
-        // offense info
-        offense_category: "Gender Based Violence",
-        day_of_offense: "2021-05-01",
-        time_of_offense: "18:30",
-        offense_type: "Assault",
-        offense_description: "Physical assault against a woman",
-        crime_code: "ABC123",
-        property_damage_or_injuries: "Minor injuries",
-
-        // accused info
-        accused_name: "Jane",
-        accused_surname: "Doe",
-        accused_race: "White",
-        accused_gender: "Female",
-        accused_age: 30,
-        accused_description: "Tall with blonde hair",
-        accused_last_seen: "2021-05-02",
-        
-        // hash info
-        hash_link: "https://i",
-        hash_date: "2021-05-02",
-    };
 
     let approved = true;
 
     const approval = (status) => {
         approved = status;
+
+        if (approved) {
+            submitDocket();
+        }
     };
+
+    const submitDocket = async() => {
+
+        try {
+            const res = await fetch(`${backendURL}approve_docket?docket_id=${docketId}`,
+            {
+                method: "POST",
+                headers: {
+                    "accept": "application/json",
+                },
+            }
+            );
+            const data = await res.json();
+            console.log(data);
+
+            if (data.success) {
+                alert("Case successfully approved");
+                push("/welcome_senior");
+
+            }
+        } catch (error) {
+
+        }
+        
+    }
+
+    const getCurrentDateTime = () => {
+        // format 31/12/2021 23:59
+
+        let today = new Date();
+        let date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+        let time = today.getHours() + ":" + today.getMinutes();
+        let dateTime = date + " " + time;
+
+        return dateTime;
+    }
+
+    const submitFeedback = async () => {
+        let feedbackString = `Date: ${getCurrentDateTime()} Feedback: ${feedback}`
+        // Officer: ${officer.rank} ${officer.surname}
+
+        try {
+            const res = await fetch(`${backendURL}update_feedback?docket_id=${docketId}&feedback=${feedbackString}`,
+            {
+                method: "POST",
+                headers: {
+                    "accept": "application/json",
+                },
+            }
+            );
+
+            console.log(res);
+
+            if (res.status == 200) {
+                alert("Feedback submitted successfully");
+                push("/welcome_senior");
+            } else {
+                alert("Feedback submission failed");
+            }
+            
+        } catch (error) {
+            
+        }
+    }
+
+
+
 
 
 </script>
@@ -107,39 +125,53 @@
 
 <h2>Docket Information</h2>
 
+{#if docket}
 
 <main class="main-content">
     <!-- Your content here -->
+    <div class="previous" id="item">
+        <h3>Previous Feedback</h3>
+        {#if docket.docket_feedback} 
 
+        {#each docket.docket_feedback as feedback}
+            <p>{feedback}</p>
+        {/each}
+
+        {:else}
+
+        <p>No previous feedback</p>
+        {/if}
+            
+    </div>
+    
     <div class="docket-info" id="item">
         <h3>Docket Info</h3>
-        <p>Occurrence ID: {docket_object.occ_ID}</p>
-        <p>Docket ID: {docket_object.docket_ID}</p>
-        <p>Relevant Officer: {docket_object.relevant_officer}</p>
+        <p>Occurrence ID: {docket.occ_ID}</p>
+        <p>Docket ID: {docket.docket_key}</p>
+        <p>Relevant Officer: {docket.relevant_officer}</p>
     </div>
 
     <div class="offense-info" id="item">
         <h3>Offense Info</h3>
-        <p>Offense Category: {docket_object.offense_category}</p>
-        <p>Day of Offense: {docket_object.day_of_offense}</p>
-        <p>Time of Offense: {docket_object.time_of_offense}</p>
-        <p>Offense Type: {docket_object.offense_type}</p>
-        <p>Offense Description: {docket_object.offense_description}</p>
-        <p>Crime Code: {docket_object.crime_code}</p>
+        <p>Offense Category: {docket.offense_category}</p>
+        <p>Day of Offense: {docket.day_of_offense}</p>
+        <p>Time of Offense: {docket.time_of_offense}</p>
+        <p>Offense Description: {docket.offense_description}</p>
+        <p>Crime Code: {docket.crime_code}</p>
         <p>
-            Property Damage or Injuries: {docket_object.property_damage_or_injuries}
+            Property Damage or Injuries: {docket.property_damage_or_injuries}
         </p>
     </div>
 
     <div class="accused-info" id="item">
         <h3>Accused Info</h3>
-        <p>Accused Name: {docket_object.accused_name}</p>
-        <p>Accused Surname: {docket_object.accused_surname}</p>
-        <p>Accused Race: {docket_object.accused_race}</p>
-        <p>Accused Gender: {docket_object.accused_gender}</p>
-        <p>Accused Age: {docket_object.accused_age}</p>
-        <p>Accused Description: {docket_object.accused_description}</p>
-        <p>Accused Last Seen: {docket_object.accused_last_seen}</p>
+        <p>Accused Name: {docket.accused_name}</p>
+        <p>Accused Surname: {docket.accused_surname}</p>
+        <p>Accused Race: {docket.accused_race}</p>
+        <p>Accused Gender: {docket.accused_gender}</p>
+        <p>Accused Age: {docket.accused_age}</p>
+        <p>Accused Description: {docket.accused_description}</p>
+        <p>Accused Last Seen: {docket.accused_last_seen}</p>
     </div>
 
  
@@ -157,12 +189,16 @@
     {#if !approved}
     Enter feedback:
     <form action="">
-        <input type="text" placeholder="enter feedback" required/>
-        <button>Submit</button>
+        <input type="text" placeholder="enter feedback" bind:value={feedback} required/>
+        <button
+            on:click|preventDefault={() => submitFeedback()}
+        >Submit</button>
     </form>
     {/if}
 
 </section>
+
+{/if}
 
 
 

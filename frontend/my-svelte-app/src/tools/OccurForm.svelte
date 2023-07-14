@@ -3,7 +3,6 @@
 
     import { occurrence, officer } from "../stores.js";
     import { onMount } from 'svelte';
-    import PopUp from "./Pop_Up.svelte";
 
     const backendURL = "http://127.0.0.1:8000/";
 
@@ -39,19 +38,6 @@
     let desc = "";
     let officer_obs = "";
 
-    /* FAST API MODEL
-    class Occurrence(BaseModel):
-    #occID: str
-    victim_name: str
-    victim_surname: str
-    victim_ID: str # Their id number 
-    cellphone: str
-    telephone: str
-    email: str
-    residential_address: str
-    occurance_description: str 
-    observations_other_info: str
-    */
 
     const fillFieldsWithDummyData = () => {
         name = "Mmabatho";
@@ -71,7 +57,7 @@
             return $officer.badgeID ? $officer.badgeID : "1234567890";
         };
         const datadic = {
-            // occID: occurrenceID,
+            occID: $occurrence,
             victim_name: name,
             victim_surname: surname,
             victim_ID: id,
@@ -83,20 +69,6 @@
             observations_other_info: officer_obs,
             attending_officer_id: getBadgeNumber(),
         };
-
-        const dummyDic = {
-            victim_name: "string",
-            victim_surname: "string",
-            victim_ID: "string",
-            cellphone: "string",
-            telephone: "string",
-            email: "string",
-            residential_address: "string",
-            occurance_description: "string",
-            observations_other_info: "string",
-            attending_officer_id: "string",
-        };
-
         console.log(datadic);
 
         try {
@@ -258,6 +230,8 @@
         name="desc"
         required
     /><br /><br />
+
+    
     {#if !occurrenceSubmitted}
         <button>Submit Occurrence</button>
     {/if}
@@ -271,11 +245,6 @@
             <button on:click={goHome}>Exit</button>
             <button on:click={createDocket}>Create Docket</button>
         </div>
-
-        <!-- <Modal show={$modal} closeButton={false}>
-    
-    <button on:click={showModal}>Proceed</button>
-    </Modal> -->
     </div>
 {/if}
 
@@ -386,12 +355,4 @@
         width: 25vh;
         border-radius: 10px;
     }
-
-    /* .buttons {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        
-    } */
 </style>
