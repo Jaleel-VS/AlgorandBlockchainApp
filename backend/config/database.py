@@ -4,10 +4,16 @@ import pymongo
 from models.status import status
 from models.user_login import UserLogin
 from datetime import datetime
+
+from dotenv import load_dotenv
+# Send relevant document to the Blockchain
+import os
+
+load_dotenv()
 # Constants
 # the connection string to connect to the mongoDB database
-USER_NAME = "jaleel_admin"
-PASSWORD = "5r0iuv7JDXh2LGaG"
+USER_NAME = os.getenv("MDB_USER_NAME")
+PASSWORD = os.getenv("MDB_PASSWORD")
 #DATABASE_NAME = "FairChanceDatabase"
 
 
@@ -45,7 +51,9 @@ async def get_all_dockets():
     dockets = docket_collection.find({})
     dockets_dicts = [docket.dict() for docket in dockets]
     return list(dockets_dicts)
-    
+
+# def update_feedback(docket_id: str, feedback: list):
+
 
 def docket_approved(docket_name:str, date_time:datetime ):
     filter = {'_id': docket_name}

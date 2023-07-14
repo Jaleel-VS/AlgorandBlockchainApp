@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class Occurrence(BaseModel):
-    # occID: str
+    occID: str
     victim_name: str
     victim_surname: str
     victim_ID: str # Their id number 

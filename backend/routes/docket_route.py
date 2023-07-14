@@ -12,6 +12,7 @@ from config.database import (
         get_tasks, get_docket, get_all_dockets, docket_collection)
 from services.transaction import Transaction
 from services.utils import get_hash
+from services.email.mailer import Email
 from utils.helper import send_hash_to_blockchain, s3_upload, s3_resource
 from datetime import datetime
 from bson import ObjectId
@@ -162,6 +163,16 @@ async def submit_initial_docket(docket: Docket):
         docket = docket.dict()
         docket["docket_key"] = docket_key
 
+
+        docket_bytes = json.dumps(docket).encode()
+        #insert hash
+        blockchain_response = send_hash_to_blockchain(docket_bytes)
+        docket["transcation_addresses"] = [blockchain_response["transaction_address"]]
+
+
+        # insert into s3
+        await s3_upload(contents=docket_bytes, key= docket_key, folder= "DOCKETS")
+
         insert_docket(docket)
         update_docket_count()
 
@@ -169,6 +180,7 @@ async def submit_initial_docket(docket: Docket):
             "success": True,
             "docket_key": docket_key
         }
+
 
     except Exception as e:
         raise HTTPException(
@@ -193,6 +205,78 @@ async def get_docket_from_db(docket_id: str):
         return {
             "message": "Not found"
         }
+
+
+@docket_router.post("/approve_docket")
+async def approve_docket(docket_id: str):
+    # get docket key, get docket from db, and update it to the one in the request, set status to approved
+    try:
+        docket = docket_collection.find_one({"docket_key": docket_id}, {"_id": 0})
+        docket["docket_status"] = "APPROVED"
+
+        docket_bytes = json.dumps(docket).encode()
+        blockchain_response = send_hash_to_blockchain(docket_bytes)
+
+        docket["transcation_addresses"].append(blockchain_response["transaction_address"])
+
+        # upload to s3
+        await s3_upload(contents=docket_bytes, key= docket_id + 'V2', folder= "DOCKETS")
+
+
+
+        docket_collection.update_one({"docket_key": docket_id}, {"$set": docket})
+
+        return {
+            "success": True
+        }
+    
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=e
+        )
+
+@docket_router.post("/update_feedback")
+async def update_feedback(docket_id: str, feedback: str): # feedback should be a modal
+    try:
+        docket = docket_collection.find_one({"docket_key": docket_id}, {"_id": 0})
+        docket["docket_feedback"].append(feedback)
+        docket["docket_status"] = "PENDING"
+
+        docket_collection.update_one({"docket_key": docket_id}, {"$set": docket})
+
+        return {
+            "success": True
+        }
+    
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=e
+        )
+    
+
+@docket_router.post("/submit_docket_for_review")
+async def submit_for_review(docket_id: str, docket_updated: Docket): # feedback should be a modal
+    try:
+        docket_updated = docket_updated.dict()
+        docket_updated["docket_status"] = "FOR_REVIEW"
+        docket_updated["docket_key"] = docket_id
+
+        docket_collection.update_one({"docket_key": docket_id}, {"$set": docket_updated})
+
+        return {
+            "success": True
+        }
+    
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=e
+        )
+
+
+
 
 
 # Uses s3
